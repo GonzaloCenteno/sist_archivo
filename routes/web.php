@@ -23,28 +23,30 @@ $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function() 
+{
 
-	Route::get('$',function(){ echo 0;});//url auxiliar
+    Route::get('$',function(){ echo 0;});//url auxiliar
 
-	Route::group(['namespace' => 'configuracion'], function() 
-        {
-	    Route::resource('usuarios', 'UsuariosController');
-	});
-        
-        Route::group(['namespace' => 'permisos'], function() 
-        {
-            Route::resource('modulos', 'ModulosController');
-            Route::resource('sub_modulos', 'Sub_ModulosController');
-            Route::resource('permisos', 'Permisos_Modulo_UsuarioController');
-        });
-        
-        Route::group(['namespace' => 'archivo'], function() 
-        {
-            Route::resource('archivos', 'ArchivoController');
-        });
+    Route::group(['namespace' => 'configuracion'], function() 
+    {
+        Route::resource('usuarios', 'UsuariosController');
+        Route::resource('tipo_archivo', 'Tipo_Archivo_Controller');
+    });
 
-	Route::get('/home', 'HomeController@index')->name('usuarios');
+    Route::group(['namespace' => 'permisos'], function() 
+    {
+        Route::resource('modulos', 'ModulosController');
+        Route::resource('sub_modulos', 'Sub_ModulosController');
+        Route::resource('permisos', 'Permisos_Modulo_UsuarioController');
+    });
 
+    Route::group(['namespace' => 'archivo'], function() 
+    {
+        Route::resource('archivos', 'ArchivoController');
+        Route::resource('asignar_archivos', 'Asignar_Archivos_Controller');
+    });
+
+    Route::get('/home', 'HomeController@index')->name('usuarios');
 
 });
