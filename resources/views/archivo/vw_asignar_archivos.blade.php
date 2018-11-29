@@ -119,9 +119,62 @@
             ondblClickRow: function (Id){}
         });
         
-        $("#vw_descripcion").keypress(function (e) {
+        $("#dlg_nombre_persona").keydown(function (e) {
             if (e.which == 13) {
-                buscar_descripcion();
+                buscar_usuario();
+            }
+        });
+  
+        jQuery("#tabla_usuario").jqGrid({
+            url: 'asignar_archivos/0?grid=usuarios&nombre=0',
+            datatype: 'json', mtype: 'GET',
+            height: 300, width: 480,
+            toolbarfilter: true,
+            colNames: ['ID','DNI','PERSONA','CARGO','USUARIO'],
+            rowNum: 12,sortname: 'persona', viewrecords: true, caption: 'LISTA DE USUARIOS', align: "center",
+            colModel: [
+                {name: 'id', index: 'id', align: 'center', hidden:true,width:20},
+                {name: 'dni', index: 'dni', align: 'center', width:10}, 
+                {name: 'persona', index: 'persona', align: 'left', width:30},
+                {name: 'cargo', index: 'cargo', align: 'left', width:10,hidden:true},
+                {name: 'usuario', index: 'usuario', align: 'left', width:10,hidden:true}
+            ],
+            pager: '#paginador_tabla_usuario',
+            rowList: [10, 20],
+            gridComplete: function () {
+                var idarray = jQuery('#tabla_usuario').jqGrid('getDataIDs');
+                if (idarray.length > 0) {
+                var firstid = jQuery('#tabla_usuario').jqGrid('getDataIDs')[0];
+                        $("#tabla_usuario").setSelection(firstid);
+                    }
+                jQuery('#tabla_usuario').jqGrid('bindKeys', {"onEnter": function (rowid) { fn_traer_datos(rowid);}});
+            },
+            onSelectRow: function (Id){},
+            ondblClickRow: function (rowid){fn_traer_datos(rowid);}
+        });
+        
+        jQuery("#tabla_asignacion_archivos").jqGrid({
+            url: '',
+            datatype: 'json', mtype: 'GET',
+            height: '300px', autowidth: true,
+            toolbarfilter: true,
+            colNames: ['ID', 'DESCRIPCION','ARCHIVO','FECHA REGISTRO','MARCADOR'],
+            rowNum: 50, sortname: 'id_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS REGISTRADOS', align: "center",
+            colModel: [
+                {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},
+                {name: 'descripcion', index: 'descripcion', align: 'left', width: 595},
+                {name: 'archivo', index: 'archivo', align: 'left', width: 250},
+                {name: 'fecha_registro', index: 'fecha_registro', align: 'center', width: 145},
+                {name: 'check', index: 'check', align: 'center', width: 100}
+            ],
+            pager: '#paginador_tabla_asignacion_archivos',
+            rowList: [10, 20, 30, 40, 50],
+            gridComplete: function () {
+                var idarray = jQuery('#tabla_asignacion_archivos').jqGrid('getDataIDs');
+                if (idarray.length > 0) {
+                var firstid = jQuery('#tabla_asignacion_archivos').jqGrid('getDataIDs')[0];
+                        $("#tabla_asignacion_archivos").setSelection(firstid);    
+                    }
             }
         });
          
@@ -131,35 +184,70 @@
 @stop
 <script language="JavaScript" type="text/javascript" src="{{ asset('archivos_js/archivo/asignar_archivos.js') }}"></script>
 
-<div id="dlg_nuevo_archivo" style="display: none;">
+<div id="dlg_nueva_asignacion_archivo" style="display: none;">
     <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
-                <form id="FormularioArchivo" name="FormularioArchivo" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
+                
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
                         <header>
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>SUBIR ARCHIVOS::..</h2>
+                                <h2>..:: INFORMACION PERSONA ::..</h2>
                         </header>
                     </div>
                 </section>
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
-                        <span class="input-group-addon" style="width: 30%;">DESCRIPCION &nbsp;<i class="fa fa-cogs"></i></span>
+                        <span class="input-group-addon" style="width: 30%;">NOMBRE PERSONA &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class="">
-                            <input id="descripcion" name="descripcion" type="text" class="form-control text-center text-uppercase" style="height: 32px;" >
+                            <input id="id_usuario" type="hidden" value="0">
+                            <input id="dlg_nombre_persona" name="dlg_nombre_persona" type="text" class="form-control text-center text-uppercase" style="height: 32px;" placeholder="ESCRIBIR EL NOMBRE DE LA PERSONA">
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-xs-12" style="margin-top: 10px;"></div>
+                
+                <div class="col-xs-6" style="padding: 0px;">
+                    <div class="input-group input-group-md" style="width: 100%">
+                        <span class="input-group-addon" style="width: 30%;">CARGO &nbsp;<i class="fa fa-cogs"></i></span>
+                        <div class="">
+                            <input id="dlg_cargo" name="dlg_cargo" type="text" class="form-control text-center text-uppercase" style="height: 32px;" placeholder="CARGO..." disabled="">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xs-6" style="padding: 0px;">
+                    <div class="input-group input-group-md" style="width: 100%">
+                        <span class="input-group-addon" style="width: 30%;">USUARIO &nbsp;<i class="fa fa-cogs"></i></span>
+                        <div class="">
+                            <input id="dlg_usuario" name="dlg_usuario" type="text" class="form-control text-center text-uppercase" style="height: 32px;" placeholder="USUARIO..." disabled="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
+        <div class="col-xs-12 cr-body" >
+            <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
+                
+                <section>
+                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
+                        <header>
+                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
+                                <h2>..:: INFORMACION DE ARCHIVOS ::..</h2>
+                        </header>
+                    </div>
+                </section>
+                
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">TIPO ARCHIVO &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class="">
-                            <select id="id_tipo_archivo" name="id_tipo_archivo" class="form-control text-center text-uppercase" style="height: 32px;">
+                            <select id="dlg_id_tipo_archivo" name="dlg_id_tipo_archivo" onchange="recuperar_archivos();" class="form-control text-center text-uppercase" style="height: 32px;">
                                 <option value='0' >.:: SELECCIONE UNA OPCION ::.</option>
                                 @foreach ($tipo_archivo as $tip)
                                     <option value='{{$tip->id_tipo_archivo}}' >{{$tip->descripcion}}</option>
@@ -170,18 +258,23 @@
                 </div>
                 
                 <div class="col-xs-12" style="margin-top: 10px;"></div>
+                
                 <div class="col-xs-12" style="padding: 0px;">
-                    <div class="input-group input-group-md" style="width: 100%">
-                        <span class="input-group-addon" style="width: 30%;">ARCHIVOS &nbsp;<i class="fa fa-cogs"></i></span>
-                        <div class="">
-                            <input id="file" name="file[]" type="file" multiple="true" class="form-control text-center" style="height: 32px;" >
-                        </div>
-                    </div>
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:5px; margin-bottom: 10px; padding: 0px !important">
+                        <table id="tabla_asignacion_archivos"></table>
+                        <div id="paginador_tabla_asignacion_archivos"></div>
+                    </article>
                 </div>
-                </form>
             </div>
-        </div>
+        </div>    
     </div>
 </div> 
+
+<div id="dlg_bus_usuario" style="display: none;">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:5px; margin-bottom: 10px; padding: 0px !important">
+        <table id="tabla_usuario"></table>
+        <div id="paginador_tabla_usuario"></div>
+    </article>
+</div>
 
 @endsection
