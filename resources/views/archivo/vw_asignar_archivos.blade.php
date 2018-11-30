@@ -34,10 +34,10 @@
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon">DESCRIPCION<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
-                                                        <input type="text" id="vw_descripcion" class="form-control text-uppercase">
+                                                        <span class="input-group-addon">NOMBRE PERSONA<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
+                                                        <input type="text" id="vw_nombre_persona" class="form-control text-uppercase">
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-success" type="button" onclick="buscar_descripcion();" title="BUSCAR">
+                                                            <button class="btn btn-success" type="button" onclick="buscar_persona();" title="BUSCAR">
                                                                 <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                             </button>
                                                         </span>
@@ -68,8 +68,8 @@
                                                 </div>
                                                 <div class="col-xs-12" style="padding: 0px; margin-top: 10px">
                                                     <article class="col-xs-12" style=" padding: 0px !important">
-                                                            <table id="tabla_archivos"></table>
-                                                            <div id="paginador_tabla_archivos"></div>
+                                                            <table id="tabla_archivo_persona"></table>
+                                                            <div id="paginador_tabla_archivo_persona"></div>
                                                     </article>
                                                 </div>
                                             </div>
@@ -92,31 +92,49 @@
         $("#menu_archivos").show();
         $("#li_config_asignar_archivos").addClass('cr-active');;
         
-        jQuery("#tabla_archivos").jqGrid({
-            url: '',
+        jQuery("#tabla_archivo_persona").jqGrid({
+            url: 'asignar_archivos/0?grid=archivo_persona',
             datatype: 'json', mtype: 'GET',
             height: '550px', autowidth: true,
             toolbarfilter: true,
-            colNames: ['ID', 'DESCRIPCION', 'FECHA REGISTRO', 'DESCARGAR ARCHIVO', 'VER ARCHIVO'],
-            rowNum: 50, sortname: 'id_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS REGISTRADOS', align: "center",
+            colNames: ['ID', 'DNI', 'PERSONA', 'CARGO', 'USUARIO', 'EMAIL'],
+            rowNum: 50, sortname: 'id', sortorder: 'desc', viewrecords: true, caption: 'ASGINACION DE ARCHIVOS A USUARIOS', align: "center",
             colModel: [
-                {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},
-                {name: 'descripcion', index: 'descripcion', align: 'left', width: 50},
-                {name: 'fecha_registro', index: 'fecha_registro', align: 'center', width: 15},
-                {name: 'nuevo', index: 'nuevo', align: 'center', width: 20},
-                {name: 'ver', index: 'ver', align: 'center', width: 20}
+                {name: 'id', index: 'id', align: 'left',width: 20, hidden: true},
+                {name: 'dni', index: 'dni', align: 'center', width: 10},
+                {name: 'persona', index: 'persona', align: 'left', width: 40},
+                {name: 'cargo', index: 'cargo', align: 'left', width: 15},
+                {name: 'usuario', index: 'usuario', align: 'left', width: 20},
+                {name: 'email', index: 'email', align: 'left', width: 25}
             ],
-            pager: '#paginador_tabla_archivos',
+            pager: '#paginador_tabla_archivo_persona',
             rowList: [10, 20, 30, 40, 50],
             gridComplete: function () {
-                    var idarray = jQuery('#tabla_archivos').jqGrid('getDataIDs');
+                    var idarray = jQuery('#tabla_archivo_persona').jqGrid('getDataIDs');
                     if (idarray.length > 0) {
-                    var firstid = jQuery('#tabla_archivos').jqGrid('getDataIDs')[0];
-                            $("#tabla_archivos").setSelection(firstid);    
+                    var firstid = jQuery('#tabla_archivo_persona').jqGrid('getDataIDs')[0];
+                            $("#tabla_archivo_persona").setSelection(firstid);    
                         }
                 },
             onSelectRow: function (Id){},
-            ondblClickRow: function (Id){}
+            ondblClickRow: function (Id)
+            {
+                perms = {!! json_encode($permisos[0]->btn_edit) !!};
+                if(perms == 1)
+                {
+                    modificar_asignacion();
+                }
+                else
+                {
+                    sin_permiso();
+                }
+            }
+        });
+        
+        $("#vw_nombre_persona").keypress(function (e) {
+            if (e.which == 13) {
+                buscar_persona();
+            }
         });
         
         $("#dlg_nombre_persona").keydown(function (e) {
@@ -168,15 +186,27 @@
                 {name: 'check', index: 'check', align: 'center', width: 100}
             ],
             pager: '#paginador_tabla_asignacion_archivos',
-            rowList: [10, 20, 30, 40, 50],
-            gridComplete: function () {
-                var idarray = jQuery('#tabla_asignacion_archivos').jqGrid('getDataIDs');
-                if (idarray.length > 0) {
-                var firstid = jQuery('#tabla_asignacion_archivos').jqGrid('getDataIDs')[0];
-                        $("#tabla_asignacion_archivos").setSelection(firstid);    
-                    }
-            }
+            rowList: [10, 20, 30, 40, 50]
         });
+        
+        jQuery("#tabla_nuevas_asignaciones").jqGrid({
+            url: '',
+            datatype: 'json', mtype: 'GET',
+            height: '300px', autowidth: true,
+            toolbarfilter: true,
+            colNames: ['ID', 'DESCRIPCION','ARCHIVO','FECHA REGISTRO','MARCADOR'],
+            rowNum: 50, sortname: 'id_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS REGISTRADOS', align: "center",
+            colModel: [
+                {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},
+                {name: 'descripcion', index: 'descripcion', align: 'left', width: 595},
+                {name: 'archivo', index: 'archivo', align: 'left', width: 250},
+                {name: 'fecha_registro', index: 'fecha_registro', align: 'center', width: 145},
+                {name: 'check', index: 'check', align: 'center', width: 100}
+            ],
+            pager: '#paginador_tabla_nuevas_asignaciones',
+            rowList: [10, 20, 30, 40, 50]
+        });
+         
          
     });
 </script>
@@ -243,17 +273,39 @@
                     </div>
                 </section>
                 
-                <div class="col-xs-12" style="padding: 0px;">
+                <div class="col-xs-12" style="padding: 0px;" id="dnuevo">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">TIPO ARCHIVO &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class="">
-                            <select id="dlg_id_tipo_archivo" name="dlg_id_tipo_archivo" onchange="recuperar_archivos();" class="form-control text-center text-uppercase" style="height: 32px;">
+                            <select id="dlg_id_tipo_archivo_dnuevo" onchange="recuperar_archivos(1);" class="form-control text-center text-uppercase" style="height: 32px;">
                                 <option value='0' >.:: SELECCIONE UNA OPCION ::.</option>
                                 @foreach ($tipo_archivo as $tip)
                                     <option value='{{$tip->id_tipo_archivo}}' >{{$tip->descripcion}}</option>
                                 @endforeach
                             </select><i></i>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="col-xs-9" style="padding: 0px;" id="dmodificar">
+                    <div class="input-group input-group-md" style="width: 100%">
+                        <span class="input-group-addon" style="width: 30%;">TIPO ARCHIVO &nbsp;<i class="fa fa-cogs"></i></span>
+                        <div class="">
+                            <select id="dlg_id_tipo_archivo_dmodificar" onchange="recuperar_archivos(2);" class="form-control text-center text-uppercase" style="height: 32px;">
+                                <option value='0' >.:: SELECCIONE UNA OPCION ::.</option>
+                                @foreach ($tipo_archivo as $tip)
+                                    <option value='{{$tip->id_tipo_archivo}}' >{{$tip->descripcion}}</option>
+                                @endforeach
+                            </select><i></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xs-3" style="padding: 0px;" id="btn_nuevas_asignaciones">
+                    <div class="input-group input-group-md text-center" style="width: 100%">
+                        <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="nuevas_asignaciones();">
+                            <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>AGREGAR NUEVOS ARCHIVOS
+                        </button> 
                     </div>
                 </div>
                 
@@ -275,6 +327,32 @@
         <table id="tabla_usuario"></table>
         <div id="paginador_tabla_usuario"></div>
     </article>
+</div>
+
+<div id="dlg_nuevas_asignaciones" style="display: none;">
+    <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
+        <div class="col-xs-12 cr-body" >
+            <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
+                
+                <section>
+                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
+                        <header>
+                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
+                                <h2>..:: INFORMACION DE ARCHIVOS ::..</h2>
+                        </header>
+                    </div>
+                </section>
+                
+                <div class="col-xs-12" style="padding: 0px;">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:5px; margin-bottom: 10px; padding: 0px !important">
+                        <table id="tabla_nuevas_asignaciones"></table>
+                        <div id="paginador_tabla_nuevas_asignaciones"></div>
+                    </article>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
