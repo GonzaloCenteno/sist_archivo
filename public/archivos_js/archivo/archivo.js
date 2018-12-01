@@ -94,31 +94,6 @@ function guardar_archivo()
   
 }
 
-function descargar_archivo(id_archivo)
-{
-    $.ajax({
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url: 'archivos/'+id_archivo+'?show=descargar_archivos',
-        type: 'GET',
-        success: function(data) 
-        {
-            if (data == 0) 
-            {
-                mostraralertas('* Contactese con el Administrador...');  
-            }
-            else
-            {
-                MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000);
-            }
-        },
-        error: function(data) {
-            mostraralertas("hubo un error, Comunicar al Administrador");
-            console.log('error');
-            console.log(data);
-        }
-    });
-}
-
 function ver_archivos(id_archivo)
 {
     window.open('archivos/0?id_archivo='+id_archivo+'&mostrar=archivo');   

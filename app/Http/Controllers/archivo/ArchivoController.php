@@ -34,10 +34,7 @@ class ArchivoController extends Controller
     {
         if ($id > 0) 
         {
-            if ($request['show'] == 'descargar_archivos') 
-            {
-                return $this->descargar_archivos($id, $request);
-            }
+            
         }
         else
         {
@@ -77,14 +74,11 @@ class ArchivoController extends Controller
     
     public function ver_archivos(Request $request)
     {
-        $sql = DB::table('principal.vw_archivos')->where('id_archivo',$request['id_archivo'])->get();
+        $sql = DB::table('principal.vw_archivos')->where('id_archivo',$request['id_archivo'])->first();
         if($sql)
         {
-            $file = storage_path('app/' . $sql[0]->ruta);
-            return Response::make($sql[0]->archivo, 200, [
-                    'Content-Type' => $sql[0]->mimetype,
-                    'Content-Disposition' => 'inline; filename="Documento"'
-                ]);
+            $ruta = \Storage::response($sql->ruta);
+            return $ruta;
         }
         else
         {
@@ -92,7 +86,7 @@ class ArchivoController extends Controller
         }
     }
     
-    public function descargar_archivos($id_archivo, Request $request)
+    public function descargar_archivos($id_archivo)
     {
         $archivo = DB::table('principal.vw_archivos')->where('id_archivo',$id_archivo)->first();
         if ($archivo) 
@@ -100,10 +94,11 @@ class ArchivoController extends Controller
             //dd($archivo);
             //return \Storage::response(storage_path('app/public/' . $archivo->usuario . '/' . $archivo->archivo));
             //return \Storage::download(storage_path('app/' . $archivo->ruta));
-            $file = storage_path('app/' . $archivo->ruta);
+            //$file = storage_path('app/' . $archivo->ruta);
+            return \Storage::download($archivo->ruta);
             //return Response::download($file);
             //return Response::download($file, 'filename.pdf', $headers);
-            return response()->download($file);
+            //return response()->download($file);
         }
         else 
         {
@@ -142,7 +137,7 @@ class ArchivoController extends Controller
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
             $Lista->rows[$Index]['id'] = $Datos->id_archivo; 
-            $nuevo = '<button class="btn btn-labeled btn-danger" type="button" onclick="descargar_archivo('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</button>';
+            $nuevo = '<a class="btn btn-labeled btn-danger" style="text-decoration: none;color:white;" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a>';
             $ver = '<button class="btn btn-labeled btn-success" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),
