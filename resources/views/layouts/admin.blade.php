@@ -70,7 +70,7 @@
                             @else
                                 <img src="data:image/png;base64,{{ Auth::user()->foto }}" style="width: 28px; height: 35px;border: 1px solid #fff; outline: 1px solid #bfbfbf;">                           
                             @endif
-                            <span style="color: black">BIENVENIDO, {{ Auth::user()->ape_nom }} </span> <i class="fa fa-angle-down" style="color: black"></i> 
+                            <span style="color: black">BIENVENIDO, {{ Auth::user()->apaterno }} {{ Auth::user()->amaterno }}, {{ Auth::user()->nombres }} </span> <i class="fa fa-angle-down" style="color: black"></i> 
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>

@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function()
         Route::resource('archivos', 'ArchivoController');
         Route::resource('asignar_archivos', 'Asignar_Archivos_Controller');
         route::get('download/{id_archivo}', 'ArchivoController@descargar_archivos')->name('download');
+        Route::resource('ver_archivos', 'Ver_Archivos_Controller');
+        route::get('desc_archivos_asignados/{id_arch_pers}', 'Ver_Archivos_Controller@descargar_archivos_asignados')->name('desc_archivos_asignados');
     });
 
     Route::get('/home', 'HomeController@index')->name('usuarios');

@@ -5,7 +5,7 @@ function buscar_descripcion(){
 
 function crear_nuevo_archivo() {
     $("#dlg_nuevo_archivo").dialog({
-        autoOpen: false, modal: true, width: 700, 
+        autoOpen: false, modal: true, width: 900, 
         show:{ effect: "explode", duration: 400},
         hide:{ effect: "explode", duration: 400}, resizable: false,
         title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>SUBIDA DE ARCHIVOS</h4></div>",

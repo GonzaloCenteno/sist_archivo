@@ -14,7 +14,7 @@ function crear_nueva_asignacion() {
         autoOpen: false, modal: true, width: 1200, 
         show:{ effect: "explode", duration: 400},
         hide:{ effect: "explode", duration: 400}, resizable: false,
-        title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>NUEVa ASIGNACION DE ARCHIVOS</h4></div>",
+        title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>NUEVA ASIGNACION DE ARCHIVOS</h4></div>",
         buttons: [{
                 html: "<i class='fa fa-save'></i>&nbsp; Guardar",
                 "class": "btn btn-success bg-color-green",

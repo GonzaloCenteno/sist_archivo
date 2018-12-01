@@ -51,19 +51,19 @@ class Sub_ModulosController extends Controller
                 {   
                     $check="";
                     if($permisosusu[0]->btn_new==1){$check='checked="checked"';}
-                    $new='<input id="cknew_'.$Datos->id_sub_mod.'" type="checkbox" '.$check.' onchange="actbtn('.$Datos->id_sub_mod.','."'new'".')">';
+                    $new='<input style="height:30px; width:100%" id="cknew_'.$Datos->id_sub_mod.'" type="checkbox" '.$check.' onchange="actbtn('.$Datos->id_sub_mod.','."'new'".')">';
                     $check="";
                     if($permisosusu[0]->btn_edit==1){$check='checked="checked"';}
-                    $edit='<input id="ckedit_'.$Datos->id_sub_mod.'" '.$check.' type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'edit'".')">';
+                    $edit='<input style="height:30px; width:100%" id="ckedit_'.$Datos->id_sub_mod.'" '.$check.' type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'edit'".')">';
                     $check="";
                     if($permisosusu[0]->btn_del==1){$check='checked="checked"';}
-                    $del='<input id="ckdel_'.$Datos->id_sub_mod.'" '.$check.' type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'del'".')">';
+                    $del='<input style="height:30px; width:100%" id="ckdel_'.$Datos->id_sub_mod.'" '.$check.' type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'del'".')">';
                 }
                 else
                 {
-                    $new='<input id="cknew_'.$Datos->id_sub_mod.'" type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'new'".')">';
-                    $edit='<input id="ckedit_'.$Datos->id_sub_mod.'" type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'edit'".')">';
-                    $del='<input id="ckdel_'.$Datos->id_sub_mod.'" type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'del'".')">';
+                    $new='<input style="height:30px; width:100%" id="cknew_'.$Datos->id_sub_mod.'" type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'new'".')">';
+                    $edit='<input style="height:30px; width:100%" id="ckedit_'.$Datos->id_sub_mod.'" type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'edit'".')">';
+                    $del='<input style="height:30px; width:100%" id="ckdel_'.$Datos->id_sub_mod.'" type="checkbox" onchange="actbtn('.$Datos->id_sub_mod.','."'del'".')">';
                 }
                 $Lista->rows[$Index]['id'] = $Datos->id_sub_mod;            
                 $Lista->rows[$Index]['cell'] = array(

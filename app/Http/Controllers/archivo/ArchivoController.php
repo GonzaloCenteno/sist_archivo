@@ -117,8 +117,8 @@ class ArchivoController extends Controller
         if ($start < 0) {
             $start = 0;
         }
-        $totalg = DB::select("select count(*) as total from principal.archivo where descripcion like '%".strtoupper($request['descripcion'])."%' and id_usuario = '".Auth::user()->id."'");
-        $sql = DB::table('principal.archivo')->where('descripcion','like', '%'.strtoupper($request['descripcion']).'%')->where('id_usuario',Auth::user()->id)->orderBy($sidx, $sord)->limit($limit)->offset($start)->get();
+        $totalg = DB::select("select count(*) as total from principal.vw_archivos where descripcion like '%".strtoupper($request['descripcion'])."%' and id_usuario = '".Auth::user()->id."'");
+        $sql = DB::table('principal.vw_archivos')->where('descripcion','like', '%'.strtoupper($request['descripcion']).'%')->where('id_usuario',Auth::user()->id)->orderBy($sidx, $sord)->limit($limit)->offset($start)->get();
 
         $total_pages = 0;
         if (!$sidx) {
@@ -142,6 +142,8 @@ class ArchivoController extends Controller
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),
                 trim($Datos->descripcion),
+                trim($Datos->archivo),
+                trim($Datos->tipo_archivo),
                 trim($Datos->fecha_registro),
                 $nuevo,
                 $ver  

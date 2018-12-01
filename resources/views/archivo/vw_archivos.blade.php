@@ -43,13 +43,21 @@
                                                         </span>
                                                     </div>                                            
                                                 </div>
+                                                
                                                 <div class="col-xs-3">
                                                     <div class="text-right">
-                                                        <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="crear_nuevo_archivo();">
-                                                            <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>SUBIR ARCHIVOS
-                                                        </button>  
+                                                        @if( $permisos[0]->btn_new ==1 )
+                                                            <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="crear_nuevo_archivo();">
+                                                                <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>SUBIR ARCHIVOS
+                                                            </button>
+                                                        @else
+                                                            <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="sin_permiso();">
+                                                                <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>SUBIR ARCHIVOS
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-xs-12" style="padding: 0px; margin-top: 10px">
                                                     <article class="col-xs-12" style=" padding: 0px !important">
                                                             <table id="tabla_archivos"></table>
@@ -81,11 +89,13 @@
             datatype: 'json', mtype: 'GET',
             height: '550px', autowidth: true,
             toolbarfilter: true,
-            colNames: ['ID', 'DESCRIPCION', 'FECHA REGISTRO', 'DESCARGAR ARCHIVO', 'VER ARCHIVO'],
+            colNames: ['ID', 'DESCRIPCION', 'ARCHIVO', 'TIPO ARCHIVO', 'FECHA REGISTRO', 'DESCARGAR ARCHIVO', 'VER ARCHIVO'],
             rowNum: 50, sortname: 'id_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS REGISTRADOS', align: "center",
             colModel: [
                 {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},
                 {name: 'descripcion', index: 'descripcion', align: 'left', width: 50},
+                {name: 'archivo', index: 'archivo', align: 'left', width: 35},
+                {name: 'tipo_archivo', index: 'tipo_archivo', align: 'left', width: 25},
                 {name: 'fecha_registro', index: 'fecha_registro', align: 'center', width: 15},
                 {name: 'nuevo', index: 'nuevo', align: 'center', width: 20},
                 {name: 'ver', index: 'ver', align: 'center', width: 20}
