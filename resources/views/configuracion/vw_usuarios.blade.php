@@ -363,8 +363,8 @@
                 <form id="FormularioUsuario" name="FormularioUsuario" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
                 <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;">
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>LLENADO DE INFORMACION::..</h2>
                         </header>

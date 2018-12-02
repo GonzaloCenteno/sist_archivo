@@ -133,7 +133,7 @@
                 <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>SUBIR ARCHIVOS::..</h2>
                         </header>

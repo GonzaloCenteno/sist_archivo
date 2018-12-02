@@ -221,7 +221,7 @@
                 
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>..:: INFORMACION PERSONA ::..</h2>
                         </header>
@@ -266,7 +266,7 @@
                 
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>..:: INFORMACION DE ARCHIVOS ::..</h2>
                         </header>
@@ -336,7 +336,7 @@
                 
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>..:: INFORMACION DE ARCHIVOS ::..</h2>
                         </header>

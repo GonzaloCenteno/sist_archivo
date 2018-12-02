@@ -33,7 +33,7 @@
         <link rel="apple-touch-startup-image" href="{{ asset('img/splash/iphone.png') }}" media="screen and (max-device-width: 320px)">
 
         <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">-->
-
+        <link rel="icon" type="image/png" href="{{ asset('img/bus-home.png') }}" />
         <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
         <link href="{{ asset('css/jquery-confirm.css') }}" rel="stylesheet">
         
@@ -41,9 +41,9 @@
 
     </head>
     <body class="desktop-detected pace-done fixed-header fixed-navigation">
-        <header id="header">
+        <header id="header" style="background: #154360 !important;">
             <div id="logo-group">                
-                <span id="logo"> <img src="" alt="SmartAdmin"> </span> 
+                <span id="logo"> <img src="{{asset('img/logo-cromotex.svg')}}" alt="TRANSPORTES CROMOTEX"> </span> 
 
             </div>
             @if (Auth::guest())
@@ -70,7 +70,7 @@
                             @else
                                 <img src="data:image/png;base64,{{ Auth::user()->foto }}" style="width: 28px; height: 35px;border: 1px solid #fff; outline: 1px solid #bfbfbf;">                           
                             @endif
-                            <span style="color: black">BIENVENIDO, {{ Auth::user()->apaterno }} {{ Auth::user()->amaterno }}, {{ Auth::user()->nombres }} </span> <i class="fa fa-angle-down" style="color: black"></i> 
+                            <span style="color: white">BIENVENIDO, {{ Auth::user()->apaterno }} {{ Auth::user()->amaterno }}, {{ Auth::user()->nombres }} </span> <i class="fa fa-angle-down" style="color: black"></i> 
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
@@ -89,8 +89,8 @@
         <div id="alertdialog" style="display: none;" ></div>
         
         @if (!Auth::guest())
-        <aside id="left-panel" style="background: #41BE82 !important">        
-            <div class="login-info" style="background: #37A26F;border-bottom: 3px solid #f2f2f2;">
+        <aside id="left-panel" style="background: #CC191C !important">        
+            <div class="login-info" style="background: #CC191C;border-bottom: 3px solid #f2f2f2;">
                 <span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
                     <a>
                         @if (Auth::user()->foto == '-')
@@ -127,7 +127,7 @@
                     
                 </ul>
             </nav>
-            <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+            <span class="minifyme" data-action="minifyMenu" style="background: #154360 !important;"> <i class="fa fa-arrow-circle-left hit"></i> </span>
         </aside>
         @endif
 
@@ -137,7 +137,7 @@
             </div>
         </div>
 
-        <div class="page-footer" style="background: #01A858;">
+        <div class="page-footer text-center" style="background: #154360 !important;">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <span class="txt-color-white">CROMOTEX © Arequipa - Perú &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="http://www.ddd.gob.pe" target="blank"style="color: white">www.ddd.gob.pe</a>

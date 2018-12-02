@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/bus-home.png') }}" />
 </head>
 <body class="hold-transition login-page" onload="dontBack();">
     <div id="app" class="login-box" style="width: 500px; height: 550px;">

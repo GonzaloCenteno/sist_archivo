@@ -138,7 +138,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>LLENADO DE INFORMACION::..</h2>
                         </header>

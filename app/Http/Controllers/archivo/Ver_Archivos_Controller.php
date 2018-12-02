@@ -14,7 +14,7 @@ class Ver_Archivos_Controller extends Controller
     {
         if( Auth::user() )
         {
-            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_archivos')->where('id_usu',Auth::user()->id)->get();
+            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_ver_archivos')->where('id_usu',Auth::user()->id)->get();
             $menu = DB::select('SELECT * from permisos.vw_permisos where id_usu='.Auth::user()->id);
             if($permisos->count() == 0)
             {
@@ -125,7 +125,7 @@ class Ver_Archivos_Controller extends Controller
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
             $Lista->rows[$Index]['id'] = $Datos->id_arch_pers;
-            if ($Datos->mimetype == 'text/plain' || $Datos->mimetype == 'application/pdf' || $Datos->mimetype == 'image/png' || $Datos->mimetype == 'image/jpeg') 
+            if ($Datos->mimetype == 'text/plain' || $Datos->mimetype == 'application/pdf' || $Datos->mimetype == 'image/png' || $Datos->mimetype == 'image/jpeg' || $Datos->mimetype == 'image/svg+xml' || $Datos->mimetype == 'video/mp4' || $Datos->mimetype == 'audio/mp3' || $Datos->mimetype == 'audio/ogg') 
             {
                 $nuevo = '<button class="btn btn-labeled btn-danger" type="button" onclick="ver_archivos_asignados('.trim($Datos->id_arch_pers).','.trim($Datos->id_usuario).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
             }
