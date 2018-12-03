@@ -16,7 +16,7 @@ class Permisos_Modulo_UsuarioController extends Controller
     public function create(Request $request)
     {
         $permiso=new Permiso_Modulo_Usuario;
-        $val=  $permiso::where("id_sub_mod","=",$request['submod'] )->where("id_usu","=",$request['usu'] )->first();
+        $val=  $permiso::where("id_sub_mod","=",$request['submod'] )->where("id_rol","=",$request['id_rol'] )->first();
         $btn='btn_'.$request['tipo'];
         if($val)
         {
@@ -35,7 +35,7 @@ class Permisos_Modulo_UsuarioController extends Controller
         {
             
             $permiso->id_sub_mod=$request['submod'];
-            $permiso->id_usu=$request['usu'];
+            $permiso->id_rol=$request['id_rol'];
             $permiso->$btn=$request['val'];
             $permiso->save();
             return $permiso->id_permiso;

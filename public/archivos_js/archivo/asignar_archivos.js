@@ -60,13 +60,36 @@ function buscar_usuario()
 }
 
 function fn_traer_datos(id_usuario){
-    $("#id_usuario").val(id_usuario);
     
-    $("#dlg_cargo").val($('#tabla_usuario').jqGrid('getCell',id_usuario,'cargo'));    
-    $("#dlg_usuario").val($('#tabla_usuario').jqGrid('getCell',id_usuario,'usuario'));
-    $("#dlg_nombre_persona").val($('#tabla_usuario').jqGrid('getCell',id_usuario,'persona'));
-    
-    $("#dlg_bus_usuario").dialog("close");    
+    MensajeDialogLoadAjax('dlg_nombre_persona', '....:: Cargando ::...');
+    $.ajax({
+        url: 'asignar_archivos/'+id_usuario+'?show=verificar_usuario',
+        type: 'GET',
+        success: function (data) {
+            if (data > 0) 
+            {
+                MensajeDialogLoadAjaxFinish('dlg_nombre_persona');
+                $("#id_usuario").val(id_usuario);
+                $("#dlg_cargo").val($('#tabla_usuario').jqGrid('getCell',id_usuario,'cargo'));    
+                $("#dlg_usuario").val($('#tabla_usuario').jqGrid('getCell',id_usuario,'usuario'));
+                $("#dlg_nombre_persona").val($('#tabla_usuario').jqGrid('getCell',id_usuario,'persona'));
+                $("#dlg_bus_usuario").dialog("close");
+            }
+            else
+            {
+                MensajeDialogLoadAjaxFinish('dlg_nombre_persona');
+                $("#dlg_bus_usuario").dialog("close");
+                mostraralertas('* LA PERSONA, YA TIENE ARCHIVOS SELECCIONADOS...BUSCAR EN LA LISTA DE ASIGNACIONES Y CON DOBLE CLICK SELECCIONAR USUARIO PARA AGREGAR NUEVOS ARCHIVOS');
+                return false;
+            }
+        },
+        error: function (data) {
+            MensajeDialogLoadAjaxFinish('dlg_nombre_persona');
+            mostraralertas('* Contactese con el Administrador...');
+            console.log('error');
+            console.log(data);
+        }
+    });         
 }
 
 function limpiar_formulario()
@@ -152,8 +175,9 @@ function insertar_datos(id_archivo,id_usuario,flag)
             else
             {
                 MensajeDialogLoadAjaxFinish('dlg_nueva_asignacion_archivo');
-                mostraralertas('* LA PERSONA, YA TIENE ARCHIVOS SELECCIONADOS...BUSCAR EN LA LISTA DE ASIGNACIONES Y CON DOBLE CLICK SELECCIONAR USUARIO PARA AGREGAR NUEVOS ARCHIVOS');
-                return false;
+                mostraralertas('* Contactese con el Administrador...');
+                console.log('error');
+                console.log(data);
             }
         },
         error: function (data) {

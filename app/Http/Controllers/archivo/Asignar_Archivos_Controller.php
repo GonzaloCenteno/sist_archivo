@@ -15,8 +15,8 @@ class Asignar_Archivos_Controller extends Controller
     {
         if( Auth::user() )
         {
-            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_asignar_archivos')->where('id_usu',Auth::user()->id)->get();
-            $menu = DB::select('SELECT * from permisos.vw_permisos where id_usu='.Auth::user()->id);
+            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_asignar_archivos')->where('id_rol',Auth::user()->id_rol)->get();
+            $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
             $tipo_archivo = DB::table('principal.tipo_archivo')->orderBy('descripcion', 'asc')->get();
             if($permisos->count() == 0)
             {
@@ -37,6 +37,10 @@ class Asignar_Archivos_Controller extends Controller
             if ($request['show'] == 'archivo_persona') 
             {
                 return $this->recuperar_datos_archivo_persona($id);
+            }
+            if ($request['show'] == 'verificar_usuario') 
+            {
+                return $this->verificar_datos_usuario($id);
             }
         }
         else
@@ -392,21 +396,12 @@ class Asignar_Archivos_Controller extends Controller
     
     public function guardar_datos_archivos_asignados(Request $request)
     {
-        $sql = DB::table('principal.vw_archivo_persona')->where('id',$request['id_usuario'])->get();
-        
-        if ($sql->count() > 0) 
-        {
-            return 0;
-        }
-        else
-        {
-            $ArchivoPersona = new ArchivoPersona;
-            $ArchivoPersona->id_archivo = $request['id_archivo'];
-            $ArchivoPersona->id_usuario = $request['id_usuario'];
-            $ArchivoPersona->flag       = $request['flag'];
-            $ArchivoPersona->save();
-            return $ArchivoPersona->id_arch_pers;
-        }
+        $ArchivoPersona = new ArchivoPersona;
+        $ArchivoPersona->id_archivo = $request['id_archivo'];
+        $ArchivoPersona->id_usuario = $request['id_usuario'];
+        $ArchivoPersona->flag       = $request['flag'];
+        $ArchivoPersona->save();
+        return $ArchivoPersona->id_arch_pers;
     }
     
     public function guardar_datos_asignacion_archivos(Request $request)
@@ -417,5 +412,19 @@ class Asignar_Archivos_Controller extends Controller
         $ArchivoPersona->flag       = $request['flag'];
         $ArchivoPersona->save();
         return $ArchivoPersona->id_arch_pers;
+    }
+    
+    public function verificar_datos_usuario($id_usuario)
+    {
+        $sql = DB::table('principal.vw_archivo_persona')->where('id',$id_usuario)->first();
+        
+        if ($sql) 
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

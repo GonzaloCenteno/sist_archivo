@@ -15,8 +15,8 @@ class ArchivoController extends Controller
     {
         if( Auth::user() )
         {
-            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_archivos')->where('id_usu',Auth::user()->id)->get();
-            $menu = DB::select('SELECT * from permisos.vw_permisos where id_usu='.Auth::user()->id);
+            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_archivos')->where('id_rol',Auth::user()->id_rol)->get();
+            $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
             $tipo_archivo = DB::table('principal.tipo_archivo')->get();
             if($permisos->count() == 0)
             {

@@ -15,13 +15,14 @@ class UsuariosController extends Controller
     {
         if( Auth::user() )
         {
-            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_usuarios')->where('id_usu',Auth::user()->id)->get();
-            $menu = DB::select('SELECT * from permisos.vw_permisos where id_usu='.Auth::user()->id);
+            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_usuarios')->where('id_rol',Auth::user()->id_rol)->get();
+            $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
+            $roles = DB::table('principal.roles')->orderBy('descripcion','asc')->get();
             if($permisos->count() == 0)
             {
                 return view('errors/sin_permiso',compact('menu','permisos'));
             }
-                return view('configuracion/vw_usuarios',compact('menu','permisos'));
+                return view('configuracion/vw_usuarios',compact('menu','permisos','roles'));
         }
         else
         {
@@ -36,6 +37,10 @@ class UsuariosController extends Controller
             if ($request['show'] == 'datos_usuario') 
             {
                 return $this->traer_datos_usuario($id, $request);
+            }
+            if ($request['show'] == 'resetear_clave') 
+            {   
+                return $this->resetar_clave_usuario($id);
             }
         }
         else
@@ -54,20 +59,7 @@ class UsuariosController extends Controller
 
     public function edit($id_usuario,Request $request)
     {
-        $Usuario = new  Usuarios;
-        $val=  $Usuario::where("id","=",$id_usuario)->first();
-        if($val)
-        {
-            $val->nombres = strtoupper($request['nombres']);
-            $val->apaterno = strtoupper($request['apaterno']);
-            $val->amaterno = strtoupper($request['amaterno']);
-            $val->cargo = strtoupper($request['cargo']);
-            $val->dni = $request['dni'];
-            $val->usuario = strtoupper($request['usuario']);
-            
-            $val->save();
-        }
-        return $id_usuario;
+        
     }
 
     public function destroy(Request $request)
@@ -88,6 +80,45 @@ class UsuariosController extends Controller
         if ($request['tipo'] == 3) 
         {
             return $this->cambiar_pass_user($request);
+        }
+        if ($request['tipo'] == 4) 
+        {
+            return $this->editar_datos_usuario($request);
+        }
+    }
+    
+    public function editar_datos_usuario(Request $request)
+    {
+        $sql = DB::table('usuarios')->where('dni',$request['form_dni_edit'])->where('id','<>',$request['id_usuario'])->get();
+        
+        if ($sql->count() > 0) {
+            return response()->json([
+                'msg' => 'si',
+            ]);
+        }
+        else
+        {
+            $Usuario = new  Usuarios;
+            $val=  $Usuario::where("id","=",$request['id_usuario'])->first();
+            if($val)
+            {
+                $file = $request->file('form_foto_edit');
+                $val->dni         = $request['form_dni_edit'];
+                $val->nombres     = strtoupper($request['form_nombres_edit']);
+                $val->apaterno    = strtoupper($request['form_apaterno_edit']);
+                $val->amaterno    = strtoupper($request['form_amaterno_edit']);
+                $val->email       = strtoupper($request['form_email_edit']);
+                $val->id_rol      = $request['form_cargo_edit'];
+
+                if ($file) {
+                    $file_1 = \File::get($file);
+                    $val->foto = base64_encode($file_1);
+                }else{
+                    $val->foto = "-";
+                }
+                $val->save();
+            }
+            return $request['id_usuario'];
         }
     }
     
@@ -138,7 +169,7 @@ class UsuariosController extends Controller
             $Usuario->amaterno    = strtoupper($request['form_amaterno']);
             $Usuario->email       = strtoupper($request['form_email']);
             $Usuario->password    = bcrypt($request['form_password']);
-            $Usuario->cargo       = strtoupper($request['form_cargo']);
+            $Usuario->id_rol      = $request['form_cargo'];
             $Usuario->usuario     = strtoupper($request['form_usuario']);
             
             if ($file) {
@@ -207,9 +238,22 @@ class UsuariosController extends Controller
                 trim($Datos->cargo),
                 trim($Datos->usuario),
                 $var,
+                trim($Datos->id_rol),
             );
         }
         return response()->json($Lista);
+    }
+    
+    public function resetar_clave_usuario($id_usuario)
+    {
+        $Usuario = new  Usuarios;
+        $val=  $Usuario::where("id","=",$id_usuario)->first();
+        if($val)
+        {
+            $val->password = bcrypt('123456');
+            $val->save();
+        }
+        return $id_usuario;
     }
 
 }

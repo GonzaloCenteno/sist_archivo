@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function()
     {
         Route::resource('usuarios', 'UsuariosController');
         Route::resource('tipo_archivo', 'Tipo_Archivo_Controller');
+        Route::resource('roles', 'RolesController');
     });
 
     Route::group(['namespace' => 'permisos'], function() 

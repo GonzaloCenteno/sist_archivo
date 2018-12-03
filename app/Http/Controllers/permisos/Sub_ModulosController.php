@@ -46,7 +46,7 @@ class Sub_ModulosController extends Controller
             $Lista->total = $total_pages;
             $Lista->records = $count;
             foreach ($sql as $Index => $Datos) {
-                $permisosusu=$sql = DB::table('permisos.permiso_modulo_usuario')->where('id_sub_mod',$Datos->id_sub_mod)->where('id_usu',$request['id_usuario'])->get();
+                $permisosusu=$sql = DB::table('permisos.permiso_modulo_usuario')->where('id_sub_mod',$Datos->id_sub_mod)->where('id_rol',$request['id_rol'])->get();
                 if(count($permisosusu)>= 1)
                 {   
                     $check="";
