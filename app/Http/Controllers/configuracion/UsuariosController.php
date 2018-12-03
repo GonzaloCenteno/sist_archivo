@@ -49,12 +49,25 @@ class UsuariosController extends Controller
 
     public function create(Request $request)
     {
-    
+        
     }
 
     public function edit($id_usuario,Request $request)
     {
-              
+        $Usuario = new  Usuarios;
+        $val=  $Usuario::where("id","=",$id_usuario)->first();
+        if($val)
+        {
+            $val->nombres = strtoupper($request['nombres']);
+            $val->apaterno = strtoupper($request['apaterno']);
+            $val->amaterno = strtoupper($request['amaterno']);
+            $val->cargo = strtoupper($request['cargo']);
+            $val->dni = $request['dni'];
+            $val->usuario = strtoupper($request['usuario']);
+            
+            $val->save();
+        }
+        return $id_usuario;
     }
 
     public function destroy(Request $request)
@@ -67,6 +80,41 @@ class UsuariosController extends Controller
         if ($request['tipo'] == 1) 
         {
             return $this->guardar_datos_usuario($request);
+        }
+        if ($request['tipo'] == 2) 
+        {
+            return $this->cambiar_foto_usuario($request);
+        }
+        if ($request['tipo'] == 3) 
+        {
+            return $this->cambiar_pass_user($request);
+        }
+    }
+    
+    public function cambiar_pass_user(Request $request){
+        $id = Auth::user()->id;
+        $pass = trim($request['pass1']);
+
+        $update = DB::table('usuarios')->where('id',$id)->update(['password'=> bcrypt($pass)]);
+        if ($update) {
+            return response()->json(['msg' => 'si']);
+        } else {
+            return response()->json(['msg' => 'no','id'=>$id]);
+        }
+    }
+    
+    public function cambiar_foto_usuario(Request $request){
+        $file = $request->file('vw_usuario_cambiar_cargar_foto');
+        $file2 = \File::get($file);        
+        
+        $id = Auth::user()->id;
+        $foto = base64_encode($file2);
+
+        $update = DB::table('usuarios')->where('id',$id)->update(['foto'=>$foto]);
+        if ($update) {
+            return response()->json(['msg' => 'si']);
+        } else {
+            return response()->json(['msg' => 'no','id'=>$id]);
         }
     }
     
@@ -108,7 +156,7 @@ class UsuariosController extends Controller
     
     public function traer_datos_usuario($id_usuario, Request $request)
     {
-        $usuario = DB::table('vw_usuarios')->where('id',$id_usuario)->get();
+        $usuario = DB::table('usuarios')->where('id',$id_usuario)->get();
         return $usuario;
     }
     
@@ -142,7 +190,15 @@ class UsuariosController extends Controller
         $Lista->total = $total_pages;
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
-            $Lista->rows[$Index]['id'] = $Datos->id;            
+            $Lista->rows[$Index]['id'] = $Datos->id;   
+            if ($Datos->estado == 1) 
+            {
+                $var = 'ACTIVO';
+            }
+            else
+            {
+                $var = 'INACTIVO';
+            }
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id),
                 trim($Datos->dni),
@@ -150,7 +206,7 @@ class UsuariosController extends Controller
                 trim($Datos->email),
                 trim($Datos->cargo),
                 trim($Datos->usuario),
-                trim($Datos->estado)
+                $var,
             );
         }
         return response()->json($Lista);

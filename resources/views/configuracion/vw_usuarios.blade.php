@@ -44,27 +44,29 @@
                                                        
                                                 </div>
                                             </div>
-                                            
-                                            <div class="col-xs-12" style="padding: 0px; margin-top: 10px">
-                                                <article class="col-xs-12" style=" padding: 0px !important">
-                                                        <table id="tabla_usuarios"></table>
-                                                        <div id="paginador_tabla_usuarios"></div>
-                                                </article>
-                                            </div>
                                         </div>
-                                        
-                               
                                         </div>
-                                        
                                     </section>
-                                    
                                 </div>
                             </div>
                            </div>
                         </section>
                     </section>
                 </div>
-            </div>            
+            </div>
+
+            <div class="well well-sm well-light" style="margin-top:-20px;">                
+                <div class="row">
+                    <div class="col-xs-12"> 
+                        <div class="row">
+                            <section id="content_2" class="col-lg-12">
+                                <table id="tabla_usuarios"></table>
+                                <div id="paginador_tabla_usuarios"></div>
+                            </section>                            
+                        </div>                                             
+                    </div>
+                </div> 
+            </div>
         </div>       
     </div>
 </section>
@@ -155,6 +157,10 @@
             onSelectRow: function (Id){},
             ondblClickRow: function (Id){fn_edit_submod()}
         });
+        
+        $(window).on('resize.jqGrid', function () {
+            $("#tabla_usuarios").jqGrid('setGridWidth', $("#content_2").width());
+        });
          
     });
 </script>
@@ -171,38 +177,73 @@
                         <div class="panel-heading bg-color-success">.:: Datos del Usuario ::.</div>
                         <div class="panel-body">
                             <div class="col col-12" style="margin-top: 10px;">
-                                <label class="label">NOMBRES Y APELLIDOS:</label>
+                                <label class="label">NOMBRES:</label>
                                 <label class="input">  
                                     <div class="input-group">
-                                        <input id="dlg_usuario_nombre" type="text" placeholder="Nombres y Apellidos" style="text-transform: uppercase">
+                                        <input id="dlg_usuario_nombres" type="text" placeholder="INGRESAR NOMBRES..." style="text-transform: uppercase" class="text-center">
                                         <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
                                     </div>
                                 </label>
                             </div>
-                            <section>
-                                <div class="col col-6">
-                                    <label class="label">USUARIO:</label>
-                                    <label class="input">
-                                        <div class="input-group">
-                                            <input id="dlg_usu_usuario" type="text" placeholder="de 3 a mas caracteres" style="text-transform: uppercase">
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="col col-6">
-                                    <label class="label">DNI:</label>
-                                    <label class="input">  
-                                        <div class="input-group">
-                                            <input id="dlg_usuario_dni" type="text" placeholder="00000000" onkeypress="return soloDNI(event);" maxlength="8" disabled="">                                
-                                        </div>
-                                    </label>                                
-                                </div>
-                            </section>
+                            <div class="col col-12" style="margin-top: 10px;">
+                                <label class="label">APELLIDO PATERNO:</label>
+                                <label class="input">  
+                                    <div class="input-group">
+                                        <input id="dlg_usuario_apaterno" type="text" placeholder="INGREAR APELLIDO PATERNO" style="text-transform: uppercase" class="text-center">
+                                        <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col col-12" style="margin-top: 10px;">
+                                <label class="label">APELLIDO MATERNO:</label>
+                                <label class="input">  
+                                    <div class="input-group">
+                                        <input id="dlg_usuario_amaterno" type="text" placeholder="INGRESAR APELLIDO MATERNO..." style="text-transform: uppercase" class="text-center">
+                                        <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="col col-12" style="margin-top: 10px;">
+                                <label class="label">CARGO:</label>
+                                <label class="input">  
+                                    <div class="input-group">
+                                        <select id='dlg_usuario_cargo' name="dlg_usuario_cargo" class="form-control text-uppercase text-center">
+                                            <option value="0">--SELECCIONE UNA PRIORIDAD--</option>
+                                            <option value="ADMIN">--ADMINISTRADOR--</option>
+                                            <option value="USUARIO">--USUARIO--</option>
+                                        </select> 
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="col col-12" style="margin-top: 10px;">
+                                <label class="label">DNI:</label>
+                                <label class="input">  
+                                    <div class="input-group">
+                                        <input id="dlg_usuario_dni" type="text" placeholder="INGRESAR DNI..." style="text-transform: uppercase">
+                                        <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="col col-12" style="margin-top: 10px;">
+                                <label class="label">USUARIO:</label>
+                                <label class="input">  
+                                    <div class="input-group">
+                                        <input id="dlg_usuario_ingreso" type="text" placeholder="INGRESAR USUARIO..." style="text-transform: uppercase" class="text-center">
+                                        <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>                 
             </div>
             <div class="text-right" style="padding-top: 10px;">
-                <button type="button" class="btn btn-labeled bg-color-green txt-color-white" onclick="update_user()">
+                <button type="button" class="btn btn-labeled bg-color-green txt-color-white" onclick="modificar_usuario()">
                     <span class="cr-btn-label"><i class="glyphicon glyphicon-save"></i></span> GUARDAR DATOS
                 </button>
             </div>
@@ -256,7 +297,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>LLenado de Información::..</h2>
                         </header>
@@ -300,7 +341,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header>
+                        <header style="background: #154360 !important">
                                 <span class="widget-icon"> <i class="fa fa-info"></i> </span>
                                 <h2>LLenado de Información::..</h2>
                         </header>

@@ -348,14 +348,20 @@ function cambiar_password() {
                 html: "<i class='fa fa-save'></i>&nbsp; Guardar",
                 "class": "btn btn-success",
                 click: function () {
+                    if ($("#vw_usuario_cam_pass_1").val() == '') {
+                        mostraralertasconfoco('* DEBES INGRESAR UNA CONTRASEÑA', 'vw_usuario_cam_pass_1');
+                        return false;
+                    }
+                    
                     if ($("#vw_usuario_cam_pass_1").val() == $("#vw_usuario_cam_pass_2").val()) {
                         $.ajax({
                             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                            url: 'cambiar_pass_user',
+                            url: 'usuarios?tipo=3',
                             method: "POST",
                             data: {pass1: $("#vw_usuario_cam_pass_1").val()},
                             success: function (data) {
                                 if (data.msg == 'si') {
+                                    MensajeExito("MENSAJE DE EXITO","LA CONTRASEÑA FUE CAMBIADA CORRECTAMENTE...",4000)
                                     dialog_close('dialog_Cambiar_password');
                                 } else {
                                     mostraralertas('* Error al cambiar la Contraseña.');
@@ -390,7 +396,7 @@ function update_foto() {
     var form = new FormData($("#form_cambiar_foto")[0]);
     $.ajax({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url: 'cambiar_foto_user',
+        url: 'usuarios?tipo=2',
         method: "POST",
         dataType: 'json',
         data: form,

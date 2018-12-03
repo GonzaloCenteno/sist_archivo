@@ -57,13 +57,6 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                
-                                                <div class="col-xs-12" style="padding: 0px; margin-top: 10px">
-                                                    <article class="col-xs-12" style=" padding: 0px !important">
-                                                            <table id="tabla_archivos"></table>
-                                                            <div id="paginador_tabla_archivos"></div>
-                                                    </article>
-                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -73,7 +66,20 @@
                         </section>
                     </section>
                 </div>
-            </div>            
+            </div> 
+            
+            <div class="well well-sm well-light" style="margin-top:-20px;">                
+                <div class="row">
+                    <div class="col-xs-12"> 
+                        <div class="row">
+                            <section id="content_2" class="col-lg-12">
+                                <table id="tabla_archivos"></table>
+                                <div id="paginador_tabla_archivos"></div>
+                            </section>                            
+                        </div>                                             
+                    </div>
+                </div> 
+            </div>
         </div>       
     </div>
 </section>
@@ -117,6 +123,10 @@
             if (e.which == 13) {
                 buscar_descripcion();
             }
+        });
+        
+        $(window).on('resize.jqGrid', function () {
+            $("#tabla_archivos").jqGrid('setGridWidth', $("#content_2").width());
         });
          
     });

@@ -124,7 +124,6 @@
                             <a href="{{$per->ruta_sis}}" title="{{$per->titulo}}"><i class="fa fa-caret-right"></i>{{$per->des_sub_mod}}</a>
                         </li>
                     @endforeach
-                    
                 </ul>
             </nav>
             <span class="minifyme" data-action="minifyMenu" style="background: #154360 !important;"> <i class="fa fa-arrow-circle-left hit"></i> </span>

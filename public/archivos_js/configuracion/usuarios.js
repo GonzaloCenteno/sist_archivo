@@ -23,9 +23,12 @@ function fn_editar_usuario() {
         url: 'usuarios/'+id_usuario+'?show=datos_usuario',
         success: function (data) {
             llamar_sub_modulo();
-            $("#dlg_usuario_nombre").val(data[0].persona);
-            $("#dlg_usu_usuario").val(data[0].usuario);
+            $("#dlg_usuario_nombres").val(data[0].nombres);
+            $("#dlg_usuario_apaterno").val(data[0].apaterno);
+            $("#dlg_usuario_amaterno").val(data[0].amaterno);
+            $("#dlg_usuario_cargo").val(data[0].cargo);
             $("#dlg_usuario_dni").val(data[0].dni);
+            $("#dlg_usuario_ingreso").val(data[0].usuario);
         }, error: function (data) {
             mostraralertas('* Error base de datos... <br> * Contactese con el administrador..');
             dialog_close('dialog_editar_usuario');
@@ -456,10 +459,73 @@ function guardar_editar_usuario(valor)
             }
         });
     }
-    if (valor == 2) 
-    {
-        
-    }
+}
 
-   
+function modificar_usuario()
+{
+    nombres = $('#dlg_usuario_nombres').val();
+    apaterno = $('#dlg_usuario_apaterno').val();
+    amaterno = $('#dlg_usuario_amaterno').val();
+    cargo = $('#dlg_usuario_cargo').val();
+    dni = $('#dlg_usuario_dni').val();
+    usuario = $('#dlg_usuario_ingreso').val();
+
+    if (nombres == '') {
+        mostraralertasconfoco('* EL CAMPO NOMBRES ES OBLIGATORIO...', '#dlg_usuario_nombres');
+        return false;
+    }
+    if (apaterno == '') {
+        mostraralertasconfoco('* EL CAMPO APELLIDO PATERNO ES OBLIGATORIO...', '#dlg_usuario_apaterno');
+        return false;
+    }
+    if (amaterno == '') {
+        mostraralertasconfoco('* EL CAMPO APELLIDO MATERNO ES OBLIGATORIO...', '#dlg_usuario_amaterno');
+        return false;
+    }
+    if (cargo == '0') {
+        mostraralertasconfoco('* DEBES SELECCIONAR UNA OPCION...', '#dlg_usuario_cargo');
+        return false;
+    }
+    if (dni == '') {
+        mostraralertasconfoco('* EL CAMPO DNI ES OBLIGATORIO...', '#dlg_usuario_dni');
+        return false;
+    }
+    if (usuario == '') {
+        mostraralertasconfoco('* EL CAMPO USUARIO ES OBLIGATORIO...', '#dlg_usuario_ingreso');
+        return false;
+    }
+    
+    id_usuario = $('#tabla_usuarios').jqGrid ('getGridParam', 'selrow');
+    
+    MensajeDialogLoadAjax('dialog_editar_usuario', '.:: Cargando ...');
+    
+    $.ajax({url: 'usuarios/'+id_usuario+'/edit',
+        type: 'GET',
+        data:{
+            nombres:nombres,
+            apaterno:apaterno,
+            amaterno:amaterno,
+            cargo:cargo,
+            dni:dni,
+            usuario:usuario
+        },
+        success: function(data) 
+        {
+            if (data > 0) 
+            {
+                MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE EDITADO CORRECTAMENTE...",4000)
+                MensajeDialogLoadAjaxFinish('dialog_editar_usuario');
+                fn_actualizar_grilla('tabla_usuarios');
+            }
+            else
+            {
+                 mostraralertas("hubo un error, Comunicar al Administrador");
+            }
+        },
+        error: function(data) {
+            mostraralertas("hubo un error, Comunicar al Administrador");
+            console.log('error');
+            console.log(data);
+        }
+    });
 }

@@ -66,12 +66,6 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12" style="padding: 0px; margin-top: 10px">
-                                                    <article class="col-xs-12" style=" padding: 0px !important">
-                                                            <table id="tabla_archivo_persona"></table>
-                                                            <div id="paginador_tabla_archivo_persona"></div>
-                                                    </article>
-                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -81,7 +75,20 @@
                         </section>
                     </section>
                 </div>
-            </div>            
+            </div>
+
+            <div class="well well-sm well-light" style="margin-top:-20px;">                
+                <div class="row">
+                    <div class="col-xs-12"> 
+                        <div class="row">
+                            <section id="content_2" class="col-lg-12">
+                                <table id="tabla_archivo_persona"></table>
+                                <div id="paginador_tabla_archivo_persona"></div>
+                            </section>                            
+                        </div>                                             
+                    </div>
+                </div> 
+            </div>
         </div>       
     </div>
 </section>
@@ -129,6 +136,10 @@
                     sin_permiso();
                 }
             }
+        });
+        
+        $(window).on('resize.jqGrid', function () {
+            $("#tabla_archivo_persona").jqGrid('setGridWidth', $("#content_2").width());
         });
         
         $("#vw_nombre_persona").keypress(function (e) {

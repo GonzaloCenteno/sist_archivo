@@ -60,12 +60,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-xs-12" style="padding: 0px; margin-top: 10px">
-                                                <article class="col-xs-12" style=" padding: 0px !important">
-                                                        <table id="tabla_tipo_archivo"></table>
-                                                        <div id="paginador_tabla_tipo_archivo"></div>
-                                                </article>
-                                            </div>
+                                            
                                         </div>
                                         
                                
@@ -79,7 +74,20 @@
                         </section>
                     </section>
                 </div>
-            </div>            
+            </div>
+
+            <div class="well well-sm well-light" style="margin-top:-20px;">                
+                <div class="row">
+                    <div class="col-xs-12"> 
+                        <div class="row">
+                            <section id="content_2" class="col-lg-12">
+                                <table id="tabla_tipo_archivo"></table>
+                                <div id="paginador_tabla_tipo_archivo"></div>
+                            </section>                            
+                        </div>                                             
+                    </div>
+                </div> 
+            </div>
         </div>       
     </div>
 </section>
@@ -124,6 +132,10 @@
                 }
             }
         });
+        
+        $(window).on('resize.jqGrid', function () {
+            $("#tabla_tipo_archivo").jqGrid('setGridWidth', $("#content_2").width());
+        });
          
     });
 </script>
@@ -148,7 +160,7 @@
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">DESCRIPCION &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
-                            <input id="dlg_descripcion" name="dlg_descripcion" type="text"  class="form-control text-center" style="height: 32px; ">
+                            <input id="dlg_descripcion" name="dlg_descripcion" type="text"  class="form-control text-center text-uppercase" style="height: 32px; ">
                         </div>
                     </div>
                 </div>
