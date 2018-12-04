@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function()
 
     Route::group(['namespace' => 'configuracion'], function() 
     {
+        Route::resource('inicio', 'InicioController');
         Route::resource('usuarios', 'UsuariosController');
         Route::resource('tipo_archivo', 'Tipo_Archivo_Controller');
         Route::resource('roles', 'RolesController');
@@ -51,6 +52,6 @@ Route::group(['middleware' => 'auth'], function()
         route::get('desc_archivos_asignados/{id_arch_pers}', 'Ver_Archivos_Controller@descargar_archivos_asignados')->name('desc_archivos_asignados');
     });
 
-    Route::get('/home', 'HomeController@index')->name('usuarios');
+    Route::get('/home', 'HomeController@index')->name('inicio');
 
 });

@@ -144,8 +144,8 @@ function guardar_asignacion_archivos(){
         return false;
     }
     
-    $('input[type=checkbox][name=id_archivo_check]').each(function() {
-        insertar_datos($(this).attr('id_archivo'),id_usuario,$(this).is(':checked')?1:0);
+    $('input[type=checkbox][name=id_archivo_check]:checked').each(function() {
+        insertar_datos($(this).attr('id_archivo'),id_usuario,1);
     });  
 }
 
@@ -179,6 +179,9 @@ function insertar_datos(id_archivo,id_usuario,flag)
                 console.log('error');
                 console.log(data);
             }
+        },
+        complete:function(){
+            MensajeExito("MENSAJE DE EXITO","LOS ARCHIVOS FUERON AGREGADOS CORRECTAMENTE...",4000);
         },
         error: function (data) {
             MensajeDialogLoadAjaxFinish('dlg_nueva_asignacion_archivo');
@@ -345,10 +348,10 @@ function agregar_nuevas_asignaciones(){
         mostraralertasconfoco('* DEBES SELECCIONAR UNA OPCION...', '#dlg_id_tipo_archivo_dmodificar');
         return false;
     }
-    
-    $('input[type=checkbox][name=asignados]').each(function() {
-        insertar_datos_asignacion($(this).attr('id_archivo'),id_usuario,$(this).is(':checked')?1:0);
-    });  
+
+    $('input[type=checkbox][name=asignados]:checked').each(function() {
+        insertar_datos_asignacion($(this).attr('id_archivo'),id_usuario,1);
+    });
 }
 
 function insertar_datos_asignacion(id_archivo,id_usuario,flag) 
@@ -377,6 +380,9 @@ function insertar_datos_asignacion(id_archivo,id_usuario,flag)
                 mostraralertas('* Contactese con el Administrador...');
                 return false;
             }
+        },
+        complete:function(){
+            MensajeExito("MENSAJE DE EXITO","LOS ARCHIVOS FUERON AGREGADOS CORRECTAMENTE...",4000);
         },
         error: function (data) {
             MensajeDialogLoadAjaxFinish('dlg_nuevas_asignaciones');

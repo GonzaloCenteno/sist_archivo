@@ -26,13 +26,13 @@ class HomeController extends Controller
     {
         if( Auth::user() )
         {
-            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_usuarios')->where('id_usu',Auth::user()->id)->get();
-            $menu = DB::select('SELECT * from permisos.vw_permisos where id_usu='.Auth::user()->id);
+            $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_inicio')->where('id_rol',Auth::user()->id_rol)->get();
+            $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
             if($permisos->count() == 0)
             {
                 return view('errors/sin_permiso',compact('menu','permisos'));
             }
-                return view('configuracion/vw_usuarios',compact('menu','permisos'));
+                return view('configuracion/vw_inicio',compact('menu','permisos'));
         }
         else
         {
