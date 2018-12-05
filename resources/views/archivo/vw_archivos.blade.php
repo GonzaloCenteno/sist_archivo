@@ -125,6 +125,12 @@
             }
         });
         
+        $("#descripcion").keypress(function(e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+        
         $(window).on('resize.jqGrid', function () {
             $("#tabla_archivos").jqGrid('setGridWidth', $("#content_2").width());
         });

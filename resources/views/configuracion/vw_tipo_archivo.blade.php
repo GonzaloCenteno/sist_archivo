@@ -96,7 +96,7 @@
     $(document).ready(function (){
         
         $("#menu_configuracion").show();
-        $("#li_config_tipo_archivo").addClass('cr-active');;
+        $("#li_config_tipo_archivo").addClass('cr-active');
         
         jQuery("#tabla_tipo_archivo").jqGrid({
             url: 'tipo_archivo/0?grid=tipo_archivo',

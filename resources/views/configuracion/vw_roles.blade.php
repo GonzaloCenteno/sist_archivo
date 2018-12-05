@@ -96,7 +96,7 @@
     $(document).ready(function (){
         
         $("#menu_configuracion").show();
-        $("#li_config_roles").addClass('cr-active');;
+        $("#li_config_roles").addClass('cr-active');
         
         jQuery("#tabla_rol").jqGrid({
             url: 'roles/0?grid=roles',

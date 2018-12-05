@@ -24,7 +24,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/usuarios';
+    protected $redirectTo = '/inicio';
 
     /**
      * Create a new controller instance.
@@ -41,18 +41,7 @@ class LoginController extends Controller
         if( \Auth::user() ){
             if(\Auth::user()->estado == 1)
             {
-                if(\Auth::user()->id_rol == 1)
-                {
-                    return '/usuarios';        
-                }
-                if(\Auth::user()->id_rol == 2)
-                {
-                    return '/archivos';
-                }
-                if(\Auth::user()->id_rol == 3)
-                {
-                    return '/ver_archivos';
-                }
+                return '/inicio';
             } 
             else 
             {

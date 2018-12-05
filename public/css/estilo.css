@@ -10,7 +10,7 @@
 }
 
 .ui-dialog .ui-widget-header{
-    background: #0B4C5F;    
+    background: #CC191C; /*COLO DE LAS CABECERAS DE LOS FORMULARIOS*/    
 }
 .ui-dialog .ui-dialog-title {
     color: #ffffff;
@@ -24,7 +24,7 @@
 }
 
 .ui-widget-content.ui-dialog{
-    border: 1px solid #01A858;   
+    border: 1px solid #D48411;   
 }
 .ui-dialog .ui-dialog-titlebar{
     border-radius: 0px;
@@ -130,7 +130,7 @@ nav ul li a {
 }
 
 .ui-jqgrid .ui-jqgrid-titlebar {    
-    background: #0B4C5F;
+    background: #D48411; /*COLOR GRILLAS JQGRID*/
     /*background-image: linear-gradient(to bottom,#41be82,#43755d); /*COLOR HEADER TITLE*/
     background-repeat: repeat-x;
     border-left: 0 none;
@@ -147,8 +147,8 @@ nav ul li a {
 
 .ui-jqgrid .ui-state-default {
     background-color: #fff;
-    border: 1px solid #0B4C5F;
-    color: #017E42;/*titulos de las columnas*/
+    border: 1px solid #D48411;
+    color: #black;/*COLOR TITULO DE LAS COLUMNAS*/
     font-weight: 400;
 }
 
@@ -174,20 +174,20 @@ nav ul li a {
 }
 
 .ui-jqgrid .ui-jqgrid-pager {    
-    background-color: #ecebeb !important;
+    background-color: #D48411 !important;
     padding: 0px !important;
 }
 .ui-jqgrid .ui-jqgrid-pager {
     font-size: 13px;    
 }
 
-.ui-widget-content {
+.ui-widget-content { //COLOR DE LAS LETRAS DENTRO DE LA GRILLA JQGRID
     background: white none repeat scroll 0 0;
-    border: 1px solid #154360;
-    color: #154360;
+    border: 1px solid #D48411;
+    color: #black;
 }
 .ui-jqgrid table, .ui-jqgrid tr.ui-row-ltr, .ui-jqgrid tr.ui-row-ltr td {
-    border: 1px solid #154360 !important;
+    border: 1px solid #D48411 !important;
 }
 
 .ui-jqgrid .ui-jqgrid-htable th div {
@@ -198,7 +198,7 @@ nav ul li a {
     padding-top: 4px;
 }
 
-.ui-widget-content table { border: 0px solid #154360 !important; }
+.ui-widget-content table { border: 0px solid #D48411 !important; }
 
 .ui-jqgrid tr.jqgrow {    
     height: 25px;
@@ -212,7 +212,7 @@ nav ul li a {
     padding-top: 0;
 }
 
-.ui-jqgrid .ui-state-highlight td {
+.ui-jqgrid .ui-state-highlight td { // COLOR CUANDO SE SELECCIONA UNA CELDA DE LA GRILLA
     border-color: #154360 !important;
     color: #154360 !important;
     font-weight: bold !important;
@@ -223,7 +223,7 @@ nav ul li a {
 {
     padding-top: 10px;
    padding-bottom: 5px;
-   background-color:#fff;
+   background-color:#fff; //COLOR DE LOS CONTENEDORES DE LAS VENTANAS MODALES
    border:1px solid #e3e3e3;
    border-radius:4px;
    box-shadow:inset 0 1px 1px rgba(0,0,0,.05);

@@ -41,7 +41,7 @@
 
     </head>
     <body class="desktop-detected pace-done fixed-header fixed-navigation">
-        <header id="header" style="background: #154360 !important;">
+        <header id="header" style="background: #CC191C !important;">
             <div id="logo-group">                
                 <span id="logo"> <img src="{{asset('img/logo-cromotex.svg')}}" alt="TRANSPORTES CROMOTEX"> </span> 
 
@@ -53,7 +53,7 @@
             @else
             <div class="pull-right">
                 <div id="hide-menu" class="btn-header pull-right">
-                    <span> <a style="background: #356E35; color:white;border: 1px solid white;" href="javascript:void(0);" data-action="toggleMenu" title="Colapsar Menu"><i class="fa fa-reorder"></i></a> </span>
+                    <span> <a style="background:#D48411; color:white;border: 1px solid white;" href="javascript:void(0);" data-action="toggleMenu" title="Colapsar Menu"><i class="fa fa-reorder"></i></a> </span>
                 </div> 
                 <div id="logout" class="btn-header transparent pull-right">
                     <span> <a style="background: #A90329 !important; color:white;border: 1px solid white;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Salir" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> 
@@ -126,7 +126,7 @@
                     @endforeach
                 </ul>
             </nav>
-            <span class="minifyme" data-action="minifyMenu" style="background: #154360 !important;"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+            <span class="minifyme" data-action="minifyMenu" style="background: #D48411 !important;"> <i class="fa fa-arrow-circle-left hit" style="color: #CC191C !important;"></i> </span>
         </aside>
         @endif
 
@@ -136,10 +136,10 @@
             </div>
         </div>
 
-        <div class="page-footer text-center" style="background: #154360 !important;">
+        <div class="page-footer text-center" style="background: #CC191C !important;">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <span class="txt-color-white">CROMOTEX © Arequipa - Perú &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="http://www.ddd.gob.pe" target="blank"style="color: white">www.ddd.gob.pe</a>
+                    <span class="txt-color-white">CROMOTEX © Arequipa - Perú &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://www.cromotex.com.pe/" target="blank"style="color: white">www.cromotex.com.pe</a>
                 </div>
             </div>            
         </div>

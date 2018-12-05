@@ -40,7 +40,7 @@
                                                     <span class="input-group-addon">NOMBRE PERSONA<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
                                                     <input type="text" id="vw_nombre_persona" class="form-control text-uppercase">
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-success" type="button" onclick="buscar_persona();" title="BUSCAR">
+                                                        <button class="btn btn-success" style="background-color:#CC191C" type="button" onclick="buscar_persona();" title="BUSCAR">
                                                             <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                         </button>
                                                     </span>
@@ -48,10 +48,10 @@
                                             </div>
                                             <div class="col-xs-5">
                                                 <div class="text-right">
-                                                    <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="crear_nuevo_usuario();">
+                                                    <button type="button" class="btn btn-labeled txt-color-white" style="background-color:#D48411" onclick="crear_nuevo_usuario();">
                                                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>NUEVO USUARIO
                                                     </button>
-                                                    <button  type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="modificar_usuario();">
+                                                    <button  type="button" class="btn btn-labeled txt-color-white" style="background-color:#CC191C" onclick="modificar_usuario();">
                                                         <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>MODIFICAR USUARIO
                                                     </button>   
                                                 </div>
@@ -87,7 +87,7 @@
     $(document).ready(function (){
         
         $("#menu_configuracion").show();
-        $("#li_config_usuarios").addClass('cr-active');;
+        $("#li_config_usuarios").addClass('cr-active');
         
         jQuery("#tabla_usuarios").jqGrid({
             url: 'usuarios/0?grid=usuarios',
