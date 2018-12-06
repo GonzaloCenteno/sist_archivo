@@ -34,7 +34,7 @@
                                                 TRANSPORTES CROMOTEX
                                         </p>
                                         <br>
-                                        <a href="https://www.cromotex.com.pe/" class="btn btn-danger btn-sm">VER MAS INFORMACION</a>
+                                        <a target="_blank" href="https://www.cromotex.com.pe/" class="btn btn-danger btn-sm">VER MAS INFORMACION</a>
                                 </div>
                         </div>
                         <!-- Slide 2 -->
@@ -46,7 +46,7 @@
                                             TRANSPORTES CROMOTEX
                                         </p>
                                         <br>
-                                        <a href="https://www.cromotex.com.pe/" class="btn bg-danger btn-sm">VER MAS INFORMACION</a>
+                                        <a target="_blank" href="https://www.cromotex.com.pe/" class="btn btn-danger btn-sm">VER MAS INFORMACION</a>
                                 </div>
                         </div>
                         

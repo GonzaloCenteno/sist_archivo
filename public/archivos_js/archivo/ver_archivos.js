@@ -3,7 +3,7 @@ function buscar_descripcion(){
     fn_actualizar_grilla('tabla_ver_archivos','ver_archivos/0?grid=ver_archivos&descripcion='+descripcion);
 }
 
-function ver_archivos_asignados(id_arch_pers,id_usuario)
+function ver_archivos_asignados(id_archivo)
 {
     $("#vw_ver_archivos").dialog({
         autoOpen: false, modal: true, width: 1300,height:800, show: {effect: "fade", duration: 300}, resizable: false,
@@ -17,5 +17,5 @@ function ver_archivos_asignados(id_arch_pers,id_usuario)
                 }]
     }).dialog('open');
     
-    $('#ver_archivo').attr('src','ver_archivos/0?mostrar=ver_archivos&id_arch_pers='+id_arch_pers+'&id_usuario='+id_usuario);    
+    $('#ver_archivo').attr('src','ver_archivos/0?mostrar=ver_archivos&id_archivo='+id_archivo);    
 }

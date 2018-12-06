@@ -142,14 +142,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <form id="FormularioUsuario" name="FormularioUsuario" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;">
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>LLENADO DE INFORMACION::..</h2>
-                        </header>
-                    </div>
-                </section>
+
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">DNI &nbsp;<i class="fa fa-cogs"></i></span>
@@ -253,7 +246,7 @@
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <form id="FormularioUsuarioEdit" name="FormularioUsuarioEdit" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
+                <input type="hidden" name="_token" id="_token2" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
                 <section>
                     <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;">
                         <header style="background: #154360 !important">

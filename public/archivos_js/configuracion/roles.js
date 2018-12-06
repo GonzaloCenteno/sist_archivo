@@ -53,7 +53,8 @@ function guardar_rol()
         type: 'GET',
         data:{
             codigo:codigo,
-            descripcion:descripcion
+            descripcion:descripcion,
+            tipo:1
         },
         success: function(data) 
         {
@@ -81,8 +82,7 @@ function modificar_rol()
 {
     $("#dialog_editar_rol").dialog({
         autoOpen: false, modal: true, width: 1500, 
-        show:{ effect: "explode", duration: 600},
-        hide:{ effect: "explode", duration: 700}, resizable: false,
+        show:{ effect: "fide", duration: 700}, resizable: false,
         title: "<div class='widget-header'><h4>&nbsp&nbsp.: EDITAR ROL :.</h4></div>",
         buttons: [ {
                 html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
@@ -92,7 +92,7 @@ function modificar_rol()
                 }
             }],
         close: function (event, ui) {
-            limpiar_form_usuario();
+            //limpiar_form_usuario();
         }
     }).dialog('open');
 
@@ -122,6 +122,66 @@ function llamar_sub_modulo()
     }
     jQuery("#table_sub_modulos").jqGrid('setGridParam', {url: 'sub_modulos?identifi='+modulo+'&id_rol='+id_rol}).trigger('reloadGrid');
             
+}
+
+//CREACION DE TIPOS DE ARCHIVO POR ROL
+
+function agregar_tip_archivos()
+{
+    $("#dlg_nuevo_tipo_rol").dialog({
+        autoOpen: false, modal: true, width: 700,
+        show:{ effect: "fide", duration: 500}, resizable: false,
+        title: "<div class='widget-header'><h4>.: TIPOS DE ARCHIVOS :.</h4></div>",
+        buttons: [{
+            html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
+            "class": "btn btn-danger",
+            click: function () {
+                $(this).dialog("close");
+            }
+        }]
+    });
+    $("#dlg_nuevo_tipo_rol").dialog('open');
+
+    id_rol = $('#inp_id_rol').val();
+    if(id_rol == 0){
+        return false;
+    }
+    jQuery("#tabla_roles_tipo_archivo").jqGrid('setGridParam', {url: 'roles/0?grid=tipo_archivos&id_rol='+id_rol}).trigger('reloadGrid');
+}
+
+function cambiar_estado(id_tipo_archivo,tip)
+{
+    if( $('#ck'+tip+'_'+id_tipo_archivo).is(':checked') ) {
+        nu=1;
+    }
+    else
+    {
+        nu=0;
+    }
+    id_rol = $('#inp_id_rol').val();
+    MensajeDialogLoadAjax('dlg_nuevo_tipo_rol', '.:: Guardando ...');
+    $.ajax({
+        url: 'roles/create',
+        type: 'GET',
+        data: {
+            id_tipo_archivo:id_tipo_archivo,
+            tip:tip,
+            val:nu,
+            id_rol:id_rol,
+            tipo:2
+        },
+        success: function(r) 
+        {
+            MensajeExito("MENSAJE DE EXTIO","SE AGREGO CORRECTAMENTE EL TIPO DE ARCHIVO",4000);
+            MensajeDialogLoadAjaxFinish('dlg_nuevo_tipo_rol');
+        },
+        error: function(data) {
+            mostraralertas("hubo un error, Comunicar al Administrador");
+            MensajeDialogLoadAjaxFinish('dlg_nuevo_tipo_rol');
+            console.log('error');
+            console.log(data);
+        }
+    });
 }
 
 //CREAR MODULOS

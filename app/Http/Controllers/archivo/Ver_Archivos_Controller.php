@@ -69,7 +69,7 @@ class Ver_Archivos_Controller extends Controller
     
     public function ver_archivos(Request $request)
     {
-        $sql = DB::table('principal.vw_ver_archivos')->where('id_arch_pers',$request['id_arch_pers'])->where('id_usuario',$request['id_usuario'])->first();
+        $sql = DB::table('principal.archivo')->where('id_archivo',$request['id_archivo'])->first();
         if($sql)
         {
             $ruta = \Storage::response($sql->ruta);
@@ -81,9 +81,9 @@ class Ver_Archivos_Controller extends Controller
         }
     }
     
-    public function descargar_archivos_asignados($id_arch_pers)
+    public function descargar_archivos_asignados($id_archivo)
     {
-        $archivo = DB::table('principal.vw_ver_archivos')->where('id_arch_pers',$id_arch_pers)->first();
+        $archivo = DB::table('principal.archivo')->where('id_archivo',$id_archivo)->first();
         if ($archivo) 
         {
             return \Storage::download($archivo->ruta);
@@ -105,8 +105,8 @@ class Ver_Archivos_Controller extends Controller
         if ($start < 0) {
             $start = 0;
         }
-        $totalg = DB::select("select count(*) as total from principal.vw_ver_archivos where descripcion like '%".strtoupper($request['descripcion'])."%' and id_usuario = '".Auth::user()->id."' and flag = 1");
-        $sql = DB::table('principal.vw_ver_archivos')->where('descripcion','like', '%'.strtoupper($request['descripcion']).'%')->where('id_usuario',Auth::user()->id)->where('flag',1)->orderBy($sidx, $sord)->limit($limit)->offset($start)->get();
+        $totalg = DB::select("select count(*) as total from principal.vw_ver_archivos where descripcion_archivo like '%".strtoupper($request['descripcion'])."%' and id = '".Auth::user()->id."'");
+        $sql = DB::table('principal.vw_ver_archivos')->where('descripcion_archivo','like', '%'.strtoupper($request['descripcion']).'%')->where('id',Auth::user()->id)->orderBy($sidx, $sord)->limit($limit)->offset($start)->get();
 
         $total_pages = 0;
         if (!$sidx) {
@@ -124,18 +124,18 @@ class Ver_Archivos_Controller extends Controller
         $Lista->total = $total_pages;
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
-            $Lista->rows[$Index]['id'] = $Datos->id_arch_pers;
+            $Lista->rows[$Index]['id'] = $Datos->id_archivo;
             if ($Datos->mimetype == 'text/plain' || $Datos->mimetype == 'application/pdf' || $Datos->mimetype == 'image/png' || $Datos->mimetype == 'image/jpeg' || $Datos->mimetype == 'image/svg+xml' || $Datos->mimetype == 'video/mp4' || $Datos->mimetype == 'audio/mp3' || $Datos->mimetype == 'audio/ogg') 
             {
-                $nuevo = '<button class="btn btn-labeled btn-danger" type="button" onclick="ver_archivos_asignados('.trim($Datos->id_arch_pers).','.trim($Datos->id_usuario).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
+                $nuevo = '<button class="btn btn-labeled btn-danger" type="button" onclick="ver_archivos_asignados('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
             }
             else 
             {
-                $nuevo = '<a class="btn btn-labeled btn-success" style="text-decoration: none;color:white;" href="'.route('desc_archivos_asignados',$Datos->id_arch_pers).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DES. ARCHIVO</a>';
+                $nuevo = '<a class="btn btn-labeled btn-success" style="text-decoration: none;color:white;" href="'.route('desc_archivos_asignados',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DES. ARCHIVO</a>';
             }
             $Lista->rows[$Index]['cell'] = array(
-                trim($Datos->id_arch_pers),
-                trim($Datos->descripcion),
+                trim($Datos->id_archivo),
+                trim($Datos->descripcion_archivo),
                 trim($Datos->archivo),
                 trim($Datos->tipo_archivo),
                 trim($Datos->fecha_registro),

@@ -119,7 +119,9 @@
                             $("#tabla_rol").setSelection(firstid);    
                         }
                 },
-            onSelectRow: function (Id){},
+            onSelectRow: function (Id){
+                $('#inp_id_rol').val($("#tabla_rol").getCell(Id, "id_rol"));
+            },
             ondblClickRow: function (Id)
             {
                 perms = {!! json_encode($permisos[0]->btn_edit) !!};
@@ -188,6 +190,22 @@
                 },
             onSelectRow: function (Id){},
             ondblClickRow: function (Id){fn_edit_submod()}
+        });
+        
+        jQuery("#tabla_roles_tipo_archivo").jqGrid({
+            url: '',
+            datatype: 'json', mtype: 'GET',
+            height: '300px', autowidth: true,
+            toolbarfilter: true,
+            colNames: ['ID', 'DESCRIPCION','MARCADOR'],
+            rowNum: 50, sortname: 'descripcion', sortorder: 'asc', viewrecords: true, caption: 'LISTA DE CATEGORIAS DE ARCHIVOS', align: "center",
+            colModel: [
+                {name: 'id_tipo_archivo', index: 'id_tipo_archivo', align: 'left',width: 20, hidden: true},
+                {name: 'descripcion', index: 'descripcion', align: 'left', width: 510},
+                {name: 'check', index: 'check', align: 'center', width: 100}
+            ],
+            pager: '#paginador_tabla_roles_tipo_archivo',
+            rowList: [10, 20, 30, 40, 50]
         });
          
     });
@@ -266,6 +284,11 @@
             <div class="text-center" style="padding-top: 10px;">
                 <button type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="modificar_datos()">
                     <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> MODIFICAR DATOS
+                </button>
+            </div>
+            <div class="text-center" style="padding-top: 10px;" id="btn_agregar" style="display:none">
+                <button type="button" class="btn btn-labeled txt-color-white" style="background-color:#CC191C;" onclick="agregar_tip_archivos()">
+                    <span class="cr-btn-label"><i class="glyphicon glyphicon-plus"></i></span> AGREGAR TIPOS DE ARCHIVOS
                 </button>
             </div>
         </div>
@@ -416,4 +439,23 @@
         </div>
     </div>
 </div>
+
+<div id="dlg_nuevo_tipo_rol" style="display: none;">
+    <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
+        <div class="col-xs-12 cr-body" >
+            <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
+                
+                <div class="col-xs-12" style="padding: 0px;">
+                    <input type="hidden" id="inp_id_rol" value="5">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:5px; margin-bottom: 10px; padding: 0px !important">
+                        <table id="tabla_roles_tipo_archivo"></table>
+                        <div id="paginador_tabla_roles_tipo_archivo"></div>
+                    </article>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
