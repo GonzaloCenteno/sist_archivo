@@ -29,7 +29,7 @@
                                     <section style="padding-right: 0px">
                                         <div class="col-xs-12">
                                             <div class="box-header with-border">
-                                                <center><h1>REGISTRO - ARCHIVOS</h1></center>
+                                                <center><h1 style="color:#CC191C"><b>REGISTRO - ARCHIVOS</b></h1></center>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
@@ -37,7 +37,7 @@
                                                         <span class="input-group-addon">DESCRIPCION<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
                                                         <input type="text" id="vw_descripcion" class="form-control text-uppercase">
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-success" type="button" onclick="buscar_descripcion();" title="BUSCAR">
+                                                            <button class="btn btn-success" style="background-color:#D48411" type="button" onclick="buscar_descripcion();" title="BUSCAR">
                                                                 <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                             </button>
                                                         </span>

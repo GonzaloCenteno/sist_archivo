@@ -127,11 +127,11 @@ class Ver_Archivos_Controller extends Controller
             $Lista->rows[$Index]['id'] = $Datos->id_archivo;
             if ($Datos->mimetype == 'text/plain' || $Datos->mimetype == 'application/pdf' || $Datos->mimetype == 'image/png' || $Datos->mimetype == 'image/jpeg' || $Datos->mimetype == 'image/svg+xml' || $Datos->mimetype == 'video/mp4' || $Datos->mimetype == 'audio/mp3' || $Datos->mimetype == 'audio/ogg') 
             {
-                $nuevo = '<button class="btn btn-labeled btn-danger" type="button" onclick="ver_archivos_asignados('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
+                $nuevo = '<button class="btn btn-labeled btn-lg" style="background-color:#D48411;color:#ffffff" type="button" onclick="ver_archivos_asignados('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
             }
             else 
             {
-                $nuevo = '<a class="btn btn-labeled btn-success" style="text-decoration: none;color:white;" href="'.route('desc_archivos_asignados',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DES. ARCHIVO</a>';
+                $nuevo = '<a class="btn btn-labeled btn-sm" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('desc_archivos_asignados',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DES. ARCHIVO</a>';
             }
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),

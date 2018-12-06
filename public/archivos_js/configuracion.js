@@ -320,14 +320,16 @@ function cambiar_foto_usuario() {
         autoOpen: false, modal: true, width: 350, show: {effect: "fade", duration: 300}, resizable: false,
         title: "<div class='widget-header'><h4>&nbsp&nbsp.: CAMBIAR FOTO :.</h4></div>",
         buttons: [{
-                html: "<i class='fa fa-save'></i>&nbsp; Guardar",
-                "class": "btn btn-success",
+                html: "<i class='fa fa-save'></i>&nbsp; GUARDAR DATOS",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 click: function () {
                     update_foto();
                 }
             }, {
-                html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger",
+                html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }
@@ -345,8 +347,9 @@ function cambiar_password() {
         autoOpen: false, modal: true, width: 350, show: {effect: "fade", duration: 300}, resizable: false,
         title: "<div class='widget-header'><h4>&nbsp&nbsp.: CONFIGURACION DE USUARIO :.</h4></div>",
         buttons: [{
-                html: "<i class='fa fa-save'></i>&nbsp; Guardar",
-                "class": "btn btn-success",
+                html: "<i class='fa fa-save'></i>&nbsp; GUARDAR DATOS",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 click: function () {
                     if ($("#vw_usuario_cam_pass_1").val() == '') {
                         mostraralertasconfoco('* DEBES INGRESAR UNA CONTRASEÑA', 'vw_usuario_cam_pass_1');
@@ -376,8 +379,9 @@ function cambiar_password() {
                     }
                 }
             }, {
-                html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger",
+                html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }

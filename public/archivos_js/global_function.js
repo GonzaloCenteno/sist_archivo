@@ -471,7 +471,7 @@ function MensajeExito(tit,cont,dura)
     $.smallBox({
                     title : tit,
                     content : "<i class='fa fa-clock-o'></i> <i>"+cont+"</i>",
-                    color : "#659265",
+                    color : "#D48411",
                     iconSmall : "fa fa-check fa-2x fadeInRight animated",
                     timeout : dura || 5000
             });

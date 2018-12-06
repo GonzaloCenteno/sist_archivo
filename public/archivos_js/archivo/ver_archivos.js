@@ -10,7 +10,8 @@ function ver_archivos_asignados(id_archivo)
         title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>VISOR DE ARCHIVOS</h4></div>",
         buttons: [{
                     html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
-                    "class": "btn btn-danger",
+                    "class": "btn btn-lg",
+                    "style": "background-color:#CC191C; color:#ffffff",
                     click: function () {
                         $(this).dialog("close");
                     }

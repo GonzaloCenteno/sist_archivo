@@ -122,7 +122,7 @@ class RolesController extends Controller
         }
     }
     
-    public function crear_roles(Reques $request)
+    public function crear_roles(Request $request)
     {
         $Roles = new Roles;
         $Roles->codigo      = strtoupper($request['codigo']);

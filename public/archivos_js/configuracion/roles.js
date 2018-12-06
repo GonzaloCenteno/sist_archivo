@@ -7,13 +7,15 @@ function crear_nuevo_rol() {
         title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>NUEVO ROL</h4></div>",
         buttons: [{
                 html: "<i class='fa fa-save'></i>&nbsp; Guardar",
-                "class": "btn btn-success",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 click: function () {
                     guardar_rol();
                 }
             }, {
                 html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }
@@ -85,8 +87,9 @@ function modificar_rol()
         show:{ effect: "fide", duration: 700}, resizable: false,
         title: "<div class='widget-header'><h4>&nbsp&nbsp.: EDITAR ROL :.</h4></div>",
         buttons: [ {
-                html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger btn-round",
+                html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }
@@ -133,8 +136,9 @@ function agregar_tip_archivos()
         show:{ effect: "fide", duration: 500}, resizable: false,
         title: "<div class='widget-header'><h4>.: TIPOS DE ARCHIVOS :.</h4></div>",
         buttons: [{
-            html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-            "class": "btn btn-danger",
+            html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+            "class": "btn btn-lg",
+            "style": "background-color:#CC191C; color:#ffffff",
             click: function () {
                 $(this).dialog("close");
             }
@@ -203,24 +207,27 @@ function fn_crea_mod()
         show: {effect: "fade", duration: 300}, resizable: false,
         title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>Generar Modulos Sistema</h4></div>",
         buttons: [{
-                html: "<i class='fa fa-sign-save'></i>&nbsp; Guardar",
-                "class": "btn btn-success",
+                html: "<i class='fa fa-sign-save'></i>&nbsp; GUARDAR DATOS",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 id:'btn_save_mod',
                 click: function () {
                     fn_save_mod();
                 }
             },
             {
-                html: "<i class='fa fa-sign-save'></i>&nbsp; Modificar",
-                "class": "btn btn-primary",
+                html: "<i class='fa fa-sign-save'></i>&nbsp; MODIFICAR",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 id:'btn_edit_mod',
                 click: function () {
                     fn_save_mod();
                 }
             },
             {
-                html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger",
+                html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }
@@ -327,24 +334,27 @@ function fn_crea_submod()
         show: {effect: "fade", duration: 300}, resizable: false,
         title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>Generar Modulos Sistema</h4></div>",
         buttons: [{
-                html: "<i class='fa fa-sign-save'></i>&nbsp; Guardar",
-                "class": "btn btn-success",
+                html: "<i class='fa fa-sign-save'></i>&nbsp; GUARDAR DATOS",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 id:'btn_save_submod',
                 click: function () {
                     fn_save_submod();
                 }
             },
             {
-                html: "<i class='fa fa-sign-save'></i>&nbsp; Modificar",
-                "class": "btn btn-primary",
+                html: "<i class='fa fa-sign-save'></i>&nbsp; MODIFICAR",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 id:'btn_edit_submod',
                 click: function () {
                     fn_save_submod();
                 }
             },
             {
-                html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger",
+                html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }

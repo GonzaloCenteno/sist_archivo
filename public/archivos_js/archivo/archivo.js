@@ -10,14 +10,16 @@ function crear_nuevo_archivo() {
         hide:{ effect: "explode", duration: 400}, resizable: false,
         title: "<div class='widget-header'><h4><span class='widget-icon'> <i class='fa fa-align-justify'></i> </span>SUBIDA DE ARCHIVOS</h4></div>",
         buttons: [{
-                html: "<i class='fa fa-save'></i>&nbsp; Guardar",
-                "class": "btn btn-success",
+                html: "<i class='fa fa-save'></i>&nbsp; GUARDAR DATOS",
+                "class": "btn btn-lg",
+                "style": "background-color:#D48411; color:#ffffff",
                 click: function () {
                     guardar_archivo();
                 }
             }, {
-                html: "<i class='fa fa-sign-out'></i>&nbsp; Salir",
-                "class": "btn btn-danger",
+                html: "<i class='fa fa-sign-out'></i>&nbsp; SALIR",
+                "class": "btn btn-lg",
+                "style": "background-color:#CC191C; color:#ffffff",
                 click: function () {
                     $(this).dialog("close");
                 }

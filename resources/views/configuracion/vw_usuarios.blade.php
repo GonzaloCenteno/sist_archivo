@@ -31,7 +31,7 @@
                                         <div class="col-xs-12">
                                             
                                         <div class="box-header with-border">
-                                            <center><h1>MANTENIMIENTO USUARIOS</h1></center>
+                                            <center><h1 style="color:#CC191C"><b>MANTENIMIENTO USUARIOS<b></h1></center>
                                         </div>
                                         
                                         <div class="row">
@@ -40,7 +40,7 @@
                                                     <span class="input-group-addon">NOMBRE PERSONA<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
                                                     <input type="text" id="vw_nombre_persona" class="form-control text-uppercase">
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-success" style="background-color:#CC191C" type="button" onclick="buscar_persona();" title="BUSCAR">
+                                                        <button class="btn btn-success" style="background-color:#D48411" type="button" onclick="buscar_persona();" title="BUSCAR">
                                                             <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                         </button>
                                                     </span>
@@ -48,10 +48,10 @@
                                             </div>
                                             <div class="col-xs-5">
                                                 <div class="text-right">
-                                                    <button type="button" class="btn btn-labeled txt-color-white" style="background-color:#D48411" onclick="crear_nuevo_usuario();">
+                                                    <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411" onclick="crear_nuevo_usuario();">
                                                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>NUEVO USUARIO
                                                     </button>
-                                                    <button  type="button" class="btn btn-labeled txt-color-white" style="background-color:#CC191C" onclick="modificar_usuario();">
+                                                    <button  type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411" onclick="modificar_usuario();">
                                                         <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>MODIFICAR USUARIO
                                                     </button>   
                                                 </div>
@@ -247,14 +247,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <form id="FormularioUsuarioEdit" name="FormularioUsuarioEdit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" id="_token2" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;">
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>LLENADO DE INFORMACION::..</h2>
-                        </header>
-                    </div>
-                </section>
+                
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">DNI &nbsp;<i class="fa fa-cogs"></i></span>
@@ -340,7 +333,7 @@
                 <div class="col-xs-12" style="margin-top: 10px;"></div>
                 <div class="col-xs-12" style="padding: 0px;" id="btn_resetear_clave">
                     <div class="input-group input-group-md text-center" style="width: 100%">
-                        <button  type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="resetear_clave();">
+                        <button  type="button" class="btn btn-labeled txt-color-white" style="background-color:#D48411; color:#ffffff" onclick="resetear_clave();">
                             <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>RESETEAR CONTRASEÑA
                         </button>
                     </div>

@@ -56,7 +56,7 @@
                     <span> <a style="background:#D48411; color:white;border: 1px solid white;" href="javascript:void(0);" data-action="toggleMenu" title="Colapsar Menu"><i class="fa fa-reorder"></i></a> </span>
                 </div> 
                 <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a style="background: #A90329 !important; color:white;border: 1px solid white;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Salir" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> 
+                    <span> <a style="background: #A90329 !important; color:white;border: 1px solid white;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Salir" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i> CERRAR SESION</a> 
                         <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
                             {{ csrf_field() }}
                         </form>
@@ -70,7 +70,7 @@
                             @else
                                 <img src="data:image/png;base64,{{ Auth::user()->foto }}" style="width: 28px; height: 35px;border: 1px solid #fff; outline: 1px solid #bfbfbf;">                           
                             @endif
-                            <span style="color: white">BIENVENIDO, {{ Auth::user()->apaterno }} {{ Auth::user()->amaterno }}, {{ Auth::user()->nombres }} </span> <i class="fa fa-angle-down" style="color: black"></i> 
+                            <span style="color: white">BIENVENIDO, {{ Auth::user()->apaterno }} {{ Auth::user()->amaterno }}, {{ Auth::user()->nombres }} | <?php $sql = DB::table('vw_usuarios')->where('id',Auth::user()->id)->first(); echo 'CARGO: '.$sql->cargo;?> </span> <i class="fa fa-angle-down" style="color: black"></i> 
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
@@ -149,7 +149,7 @@
                 <div  class="smart-form">
                     <div class="panel-group">                
                         <div class="panel panel-success" style="border: 0px !important;">
-                            <div class="panel-heading bg-color-success">.:: Selecciona Tu Foto ::.</div>
+                            <div class="panel-heading" style="background-color:#D48411">.:: Selecciona Tu Foto ::.</div>
                             <div class="panel-body">
                                 <form id="form_cambiar_foto" name="form_cambiar_foto">
                                 <div class="text-center col col-12" style="margin-top: 10px;">                            
@@ -170,7 +170,7 @@
                 <div  class="smart-form">
                     <div class="panel-group">                
                         <div class="panel panel-success" style="border: 0px !important;">
-                            <div class="panel-heading bg-color-success">.:: Cambiar Password ::.</div>
+                            <div class="panel-heading" style="background-color:#D48411">.:: Cambiar Password ::.</div>
                             <div class="panel-body">
                                 <section style="margin-top: 10px;">                                    
                                     <label class="label">Nuevo Contraseña:</label>

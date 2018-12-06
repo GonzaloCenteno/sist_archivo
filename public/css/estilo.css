@@ -130,8 +130,8 @@ nav ul li a {
 }
 
 .ui-jqgrid .ui-jqgrid-titlebar {    
-    background: #D48411; /*COLOR GRILLAS JQGRID*/
-    /*background-image: linear-gradient(to bottom,#41be82,#43755d); /*COLOR HEADER TITLE*/
+    /*background: #CC191C; /*COLOR GRILLAS JQGRID*/
+    background-image: linear-gradient(to bottom,#CC191C,#D48411); /*COLOR HEADER TITLE*/
     background-repeat: repeat-x;
     border-left: 0 none;
     border-right: 0 none;
@@ -148,7 +148,7 @@ nav ul li a {
 .ui-jqgrid .ui-state-default {
     background-color: #fff;
     border: 1px solid #D48411;
-    color: #black;/*COLOR TITULO DE LAS COLUMNAS*/
+    background-image: linear-gradient(to bottom,#D48411,#CC191C);/*COLOR TITULO DEL FOOTER*/
     font-weight: 400;
 }
 
@@ -181,7 +181,7 @@ nav ul li a {
     font-size: 13px;    
 }
 
-.ui-widget-content { //COLOR DE LAS LETRAS DENTRO DE LA GRILLA JQGRID
+.ui-widget-content { /*COLOR DE LAS LETRAS DENTRO DE LA GRILLA JQGRID*/
     background: white none repeat scroll 0 0;
     border: 1px solid #D48411;
     color: #black;
@@ -212,9 +212,9 @@ nav ul li a {
     padding-top: 0;
 }
 
-.ui-jqgrid .ui-state-highlight td { // COLOR CUANDO SE SELECCIONA UNA CELDA DE LA GRILLA
-    border-color: #154360 !important;
-    color: #154360 !important;
+.ui-jqgrid .ui-state-highlight td { /* COLOR CUANDO SE SELECCIONA UNA CELDA DE LA GRILLA*/
+    border-color: #CC191C !important;
+    color: #CC191C !important;
     font-weight: bold !important;
 }
 
@@ -223,7 +223,7 @@ nav ul li a {
 {
     padding-top: 10px;
    padding-bottom: 5px;
-   background-color:#fff; //COLOR DE LOS CONTENEDORES DE LAS VENTANAS MODALES
+   background-color:#fff; /*COLOR DE LOS CONTENEDORES DE LAS VENTANAS MODALES*/
    border:1px solid #e3e3e3;
    border-radius:4px;
    box-shadow:inset 0 1px 1px rgba(0,0,0,.05);
@@ -264,11 +264,11 @@ nav ul li a {
 }
 .cr-active
 {
-    background-color:#E1F3E5 !important;
+    background-color:#D48411 !important; /* COLOR DEL MENU CUANDO ESTA ACTIVO */
 }
 .cr-active a
 {
-    color:#006000 !important;
+    color:#FFFFFF !important; /* COLOR DE LA OPCION DEL MENU SELECCIONADO */
 }
 .cr-btn-label
 {

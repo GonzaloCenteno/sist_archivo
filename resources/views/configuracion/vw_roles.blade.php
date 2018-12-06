@@ -31,7 +31,7 @@
                                         <div class="col-xs-12">
                                             
                                         <div class="box-header with-border">
-                                            <center><h1>MANTENIMIENTO DE ROLES</h1></center>
+                                            <center><h1 style="color:#CC191C"><b>MANTENIMIENTO DE ROLES</b></h1></center>
                                         </div>
                                         
                                         <div class="row">
@@ -39,20 +39,20 @@
                                             <div class="col-xs-12">
                                                 <div class="text-center">
                                                     @if( $permisos[0]->btn_new ==1 )
-                                                        <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="crear_nuevo_rol();">
+                                                        <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411" onclick="crear_nuevo_rol();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>NUEVO ROL
                                                         </button>
                                                     @else
-                                                        <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="sin_permiso();">
+                                                        <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411" onclick="sin_permiso();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>NUEVO ROL
                                                         </button>
                                                     @endif
                                                     @if( $permisos[0]->btn_edit ==1 )
-                                                        <button  type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="modificar_rol();">
+                                                        <button  type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411" onclick="modificar_rol();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>MODIFICAR ROL
                                                         </button>
                                                     @else
-                                                        <button  type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="sin_permiso();">
+                                                        <button  type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411" onclick="sin_permiso();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>MODIFICAR ROL
                                                         </button>
                                                     @endif
@@ -219,14 +219,6 @@
     <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>LLENADO DE INFORMACION::..</h2>
-                        </header>
-                    </div>
-                </section>
                 
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
@@ -257,7 +249,7 @@
             <div  class="smart-form">
                 <div class="panel-group">                
                     <div class="panel panel-success" style="padding-bottom: 20px; ">
-                        <div class="panel-heading bg-color-success">.:: Datos del Usuario ::.</div>
+                        <div class="panel-heading" style="background-color:#CC191C; color:#ffffff">.:: DATOS DEL ROL ::.</div>
                         <div class="panel-body">
                             <div class="col col-12" style="margin-top: 10px;">
                                 <label class="label">CODIGO:</label>
@@ -282,12 +274,12 @@
                 </div>                 
             </div>
             <div class="text-center" style="padding-top: 10px;">
-                <button type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="modificar_datos()">
+                <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C; color:#ffffff" onclick="modificar_datos()">
                     <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> MODIFICAR DATOS
                 </button>
             </div>
             <div class="text-center" style="padding-top: 10px;" id="btn_agregar" style="display:none">
-                <button type="button" class="btn btn-labeled txt-color-white" style="background-color:#CC191C;" onclick="agregar_tip_archivos()">
+                <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411;" onclick="agregar_tip_archivos()">
                     <span class="cr-btn-label"><i class="glyphicon glyphicon-plus"></i></span> AGREGAR TIPOS DE ARCHIVOS
                 </button>
             </div>
@@ -300,14 +292,14 @@
         </article>
         <div class="col-xs-12" style=" margin-bottom: 10px; padding: 0px;">
             <ul class="text-center" style="margin-top: 5px !important; margin-bottom: 0px !important; padding: 0px;">                                        
-                    <button type="button" class="btn btn-labeled bg-color-green txt-color-white" onclick="fn_new_mod()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-plus"></i></span> Nuevo
+                    <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C;" onclick="fn_new_mod()">
+                        <span class="cr-btn-label"><i class="glyphicon glyphicon-plus"></i></span> NUEVO
                     </button>
-                    <button type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="fn_edit_mod()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> Editar
+                    <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411;" onclick="fn_edit_mod()">
+                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> EDITAR
                     </button>
-                    <button id="btn_delmod" data-token="{{ csrf_token() }}" type="button" class="btn btn-labeled bg-color-red txt-color-white" onclick="fn_borrar_Modulo()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> Borrar
+                    <button id="btn_delmod" data-token="{{ csrf_token() }}" type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C;" onclick="fn_borrar_Modulo()">
+                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> BORRAR
                     </button>
                     
             </ul>
@@ -320,14 +312,14 @@
         </article>
         <div class="col-xs-12" style=" margin-bottom: 10px; padding: 0px;">
             <ul class="text-center" style="margin-top: 5px !important; margin-bottom: 0px !important; padding: 0px;">                                        
-                    <button type="button" class="btn btn-labeled bg-color-green txt-color-white" onclick="fn_new_submod()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-plus"></i></span> Nuevo
+                    <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C;" onclick="fn_new_submod()">
+                        <span class="cr-btn-label"><i class="glyphicon glyphicon-plus"></i></span> NUEVO
                     </button>
-                    <button type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="fn_edit_submod()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> Editar
+                    <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411;" onclick="fn_edit_submod()">
+                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> EDITAR
                     </button>
-                    <button id="btn_delsubmod" data-token="{{ csrf_token() }}" type="button" class="btn btn-labeled bg-color-red txt-color-white" onclick="fn_borrar_subModulo()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> Borrar
+                    <button id="btn_delsubmod" data-token="{{ csrf_token() }}" type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C;" onclick="fn_borrar_subModulo()">
+                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> BORRAR
                     </button>
             </ul>
         </div>
@@ -339,14 +331,6 @@
     <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>LLenado de Información::..</h2>
-                        </header>
-                    </div>
-                </section>
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon ">Nombre del Módulo (Será Visible desde el Menú) &nbsp;<i class="fa fa-cogs"></i></span>
@@ -383,14 +367,6 @@
     <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>LLenado de Información::..</h2>
-                        </header>
-                    </div>
-                </section>
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon ">Nombre del Sub Módulo (Será Visible desde el Menú) &nbsp;<i class="fa fa-cogs"></i></span>

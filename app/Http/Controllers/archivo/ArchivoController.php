@@ -17,7 +17,7 @@ class ArchivoController extends Controller
         {
             $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_archivos')->where('id_rol',Auth::user()->id_rol)->get();
             $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
-            $tipo_archivo = DB::table('principal.tipo_archivo')->get();
+            $tipo_archivo = DB::table('principal.vw_ver_tipos_archivos')->where('id',Auth::user()->id)->get();
             if($permisos->count() == 0)
             {
                 return view('errors/sin_permiso',compact('menu','permisos'));
@@ -137,8 +137,8 @@ class ArchivoController extends Controller
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
             $Lista->rows[$Index]['id'] = $Datos->id_archivo; 
-            $nuevo = '<a class="btn btn-labeled btn-danger" style="text-decoration: none;color:white;" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a>';
-            $ver = '<button class="btn btn-labeled btn-success" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
+            $nuevo = '<a class="btn btn-labeled btn-sm" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a>';
+            $ver = '<button class="btn btn-labeled btn-success" style="background-color:#D48411;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),
                 trim($Datos->descripcion),

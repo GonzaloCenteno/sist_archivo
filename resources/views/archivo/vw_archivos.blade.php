@@ -29,7 +29,7 @@
                                     <section style="padding-right: 0px">
                                         <div class="col-xs-12">
                                             <div class="box-header with-border">
-                                                <center><h1>REGISTRO - ARCHIVO</h1></center>
+                                                <center><h1 style="color:#CC191C"><b>REGISTRO - ARCHIVO</b></h1></center>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-9">
@@ -37,7 +37,7 @@
                                                         <span class="input-group-addon">DESCRIPCION<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
                                                         <input type="text" id="vw_descripcion" class="form-control text-uppercase">
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-success" type="button" onclick="buscar_descripcion();" title="BUSCAR">
+                                                            <button class="btn btn-success" style="background-color:#D48411" type="button" onclick="buscar_descripcion();" title="BUSCAR">
                                                                 <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                             </button>
                                                         </span>
@@ -47,11 +47,11 @@
                                                 <div class="col-xs-3">
                                                     <div class="text-right">
                                                         @if( $permisos[0]->btn_new ==1 )
-                                                            <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="crear_nuevo_archivo();">
+                                                            <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="crear_nuevo_archivo();">
                                                                 <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>SUBIR ARCHIVOS
                                                             </button>
                                                         @else
-                                                            <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="sin_permiso();">
+                                                            <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="sin_permiso();">
                                                                 <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>SUBIR ARCHIVOS
                                                             </button>
                                                         @endif
@@ -147,14 +147,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <form id="FormularioArchivo" name="FormularioArchivo" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>SUBIR ARCHIVOS::..</h2>
-                        </header>
-                    </div>
-                </section>
+                
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">DESCRIPCION &nbsp;<i class="fa fa-cogs"></i></span>

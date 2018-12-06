@@ -31,7 +31,7 @@
                                         <div class="col-xs-12">
                                             
                                         <div class="box-header with-border">
-                                            <center><h1>MANTENIMIENTO TIPO ARCHIVO</h1></center>
+                                            <center><h1 style="color:#CC191C"><b>MANTENIMIENTO TIPO ARCHIVO</b></h1></center>
                                         </div>
                                         
                                         <div class="row">
@@ -39,20 +39,20 @@
                                             <div class="col-xs-12">
                                                 <div class="text-center">
                                                     @if( $permisos[0]->btn_new ==1 )
-                                                        <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="crear_nuevo_tipo_archivo();">
+                                                        <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="crear_nuevo_tipo_archivo();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>NUEVO TIPO
                                                         </button>
                                                     @else
-                                                        <button type="button" class="btn btn-labeled bg-color-greenLight txt-color-white" onclick="sin_permiso();">
+                                                        <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="sin_permiso();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>NUEVO TIPO
                                                         </button>
                                                     @endif
                                                     @if( $permisos[0]->btn_edit ==1 )
-                                                        <button  type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="modificar_tipo_archivo();">
+                                                        <button  type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="modificar_tipo_archivo();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>MODIFICAR TIPO
                                                         </button>
                                                     @else
-                                                        <button  type="button" class="btn btn-labeled bg-color-blue txt-color-white" onclick="sin_permiso();">
+                                                        <button  type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="sin_permiso();">
                                                             <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>MODIFICAR TIPO
                                                         </button>
                                                     @endif
@@ -148,14 +148,6 @@
     <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
-                <section>
-                    <div class="jarviswidget jarviswidget-color-green" style="margin-bottom: 15px;"  >
-                        <header style="background: #154360 !important">
-                                <span class="widget-icon"> <i class="fa fa-info"></i> </span>
-                                <h2>LLENADO DE INFORMACION::..</h2>
-                        </header>
-                    </div>
-                </section>
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">DESCRIPCION &nbsp;<i class="fa fa-cogs"></i></span>
