@@ -77,7 +77,7 @@ function guardar_usuario(valor)
         return false;
     }
     if (password == '') {
-        mostraralertasconfoco('* EL CAMPO PASSWORD MATERNO ES OBLIGATORIO...', '#form_password');
+        mostraralertasconfoco('* EL CAMPO PASSWORD ES OBLIGATORIO...', '#form_password');
         return false;
     }
     if (cargo == '0') {
@@ -85,12 +85,13 @@ function guardar_usuario(valor)
         return false;
     }
     if (usuario == '') {
-        mostraralertasconfoco('* EL CAMPO USUARIO MATERNO ES OBLIGATORIO...', '#form_usuario');
+        mostraralertasconfoco('* EL CAMPO USUARIO ES OBLIGATORIO...', '#form_usuario');
         return false;
     }
     
     if (valor == 1) 
     {
+        MensajeDialogLoadAjax('dlg_nuevo_usuario', '.:: Cargando ...');
         var form= new FormData($("#FormularioUsuario")[0]);
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -103,10 +104,17 @@ function guardar_usuario(valor)
             success: function (data) {
                 if(data.msg === 'si')
                 {
-                    mostraralertasconfoco('El DNI: '+$('#form_dni').val()+' Ya fue Registrado en el Sistema', '#form_dni');
+                    mostraralertasconfoco('El DNI: '+$('#form_dni').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#form_dni');
+                    MensajeDialogLoadAjaxFinish('dlg_nuevo_usuario');
+                }
+                else if(data.msg === 'usuario_ok')
+                {
+                    mostraralertasconfoco('El NOMBRE DE USUARIO: '+$('#form_usuario').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#form_usuario');
+                    MensajeDialogLoadAjaxFinish('dlg_nuevo_usuario');
                 }
                 else
                 {
+                    MensajeDialogLoadAjaxFinish('dlg_nuevo_usuario');
                     MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000)
                     $("#dlg_nuevo_usuario").dialog("close");
                     fn_actualizar_grilla('tabla_usuarios');
@@ -146,6 +154,9 @@ function modificar_usuario()
                     $(this).dialog("close");
                 }
             }],
+            close: function (event, ui) {
+                $('#form_foto_edit').val('');
+            }
         });
         $("#dlg_editar_usuario").dialog('open');
 
@@ -180,6 +191,41 @@ function modificar_usuario()
 
 function editar_usuario(valor)
 {
+    dni = $('#form_dni_edit').val();
+    nombres = $('#form_nombres_edit').val();
+    apaterno = $('#form_apaterno_edit').val();
+    amaterno = $('#form_amaterno_edit').val();
+    email = $('#form_email_edit').val();
+    password = $('#form_password').val();
+    cargo = $('#form_cargo_edit').val();
+    usuario = $('#form_usuario_edit').val();
+    foto = $('#form_foto_edit').val();
+
+    if (dni == '') {
+        mostraralertasconfoco('* EL CAMPO DNI ES OBLIGATORIO...', '#form_dni_edit');
+        return false;
+    }
+    if (nombres == '') {
+        mostraralertasconfoco('* EL CAMPO NOMBRES ES OBLIGATORIO...', '#form_nombres_edit');
+        return false;
+    }
+    if (apaterno == '') {
+        mostraralertasconfoco('* EL CAMPO APELLIDO PATERNO ES OBLIGATORIO...', '#form_apaterno_edit');
+        return false;
+    }
+    if (amaterno == '') {
+        mostraralertasconfoco('* EL CAMPO APELLIDO MATERNO ES OBLIGATORIO...', '#form_amaterno_edit');
+        return false;
+    }
+    if (cargo == '0') {
+        mostraralertasconfoco('* DEBES SELECCIONAR UNA OPCION...', '#form_cargo_edit');
+        return false;
+    }
+    if (usuario == '') {
+        mostraralertasconfoco('* EL CAMPO USUARIO ES OBLIGATORIO...', '#form_usuario_edit');
+        return false;
+    }
+    
     if (valor == 1) 
     {
         MensajeDialogLoadAjax('dlg_editar_usuario', '.:: Cargando ...');
@@ -195,7 +241,12 @@ function editar_usuario(valor)
             success: function (data) {
                 if(data.msg === 'si')
                 {
-                    mostraralertasconfoco('El DNI: '+$('#form_dni_edit').val()+' Ya fue Registrado en el Sistema', '#form_dni');
+                    mostraralertasconfoco('El DNI: '+$('#form_dni_edit').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#form_dni_edit');
+                    MensajeDialogLoadAjaxFinish('dlg_editar_usuario');
+                }
+                else if(data.msg === 'usuario_ok')
+                {
+                    mostraralertasconfoco('El NOMBRE DE USUARIO: '+$('#form_usuario_edit').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#form_usuario_edit');
                     MensajeDialogLoadAjaxFinish('dlg_editar_usuario');
                 }
                 else

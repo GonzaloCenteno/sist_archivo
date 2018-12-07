@@ -101,6 +101,7 @@ function modificar_rol()
 
     id_rol = $('#tabla_rol').jqGrid('getGridParam', 'selrow');
     
+    MensajeDialogLoadAjax('dialog_editar_rol', '.:: Cargando ...');
     $.ajax({
         type: 'GET',
         url: 'roles/'+id_rol+'?show=datos_roles',
@@ -124,6 +125,7 @@ function llamar_sub_modulo()
         return false;
     }
     jQuery("#table_sub_modulos").jqGrid('setGridParam', {url: 'sub_modulos?identifi='+modulo+'&id_rol='+id_rol}).trigger('reloadGrid');
+    MensajeDialogLoadAjaxFinish('dialog_editar_rol');
             
 }
 

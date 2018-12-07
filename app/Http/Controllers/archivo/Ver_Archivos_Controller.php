@@ -70,27 +70,27 @@ class Ver_Archivos_Controller extends Controller
     public function ver_archivos(Request $request)
     {
         $sql = DB::table('principal.archivo')->where('id_archivo',$request['id_archivo'])->first();
-        if($sql)
+        if(file_exists(storage_path('app/' . $sql->ruta)))
         {
             $ruta = \Storage::response($sql->ruta);
             return $ruta;
         }
         else
         {
-            return "No hay Archvos";
+            return "EL ARCHIVO NO EXISTE, O FUE ELIMINADO";
         }
     }
     
     public function descargar_archivos_asignados($id_archivo)
     {
         $archivo = DB::table('principal.archivo')->where('id_archivo',$id_archivo)->first();
-        if ($archivo) 
+        if (file_exists(storage_path('app/' . $archivo->ruta))) 
         {
             return \Storage::download($archivo->ruta);
         }
         else 
         {
-            return 0;
+            return "EL ARCHIVO NO EXISTE, O FUE ELIMINADO";
         }
     }
     

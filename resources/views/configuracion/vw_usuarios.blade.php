@@ -38,9 +38,9 @@
                                             <div class="col-xs-7">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">NOMBRE PERSONA<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
-                                                    <input type="text" id="vw_nombre_persona" class="form-control text-uppercase">
+                                                    <input type="text" id="vw_nombre_persona" class="form-control text-uppercase input-lg">
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-success" style="background-color:#D48411" type="button" onclick="buscar_persona();" title="BUSCAR">
+                                                        <button class="btn btn-success btn-lg" style="background-color:#D48411" type="button" onclick="buscar_persona();" title="BUSCAR">
                                                             <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                         </button>
                                                     </span>
@@ -128,6 +128,13 @@
                 buscar_persona();
             }
         });
+        
+        $("#form_usuario").focus(function(){
+            nombres = $('#form_nombres').val();
+            apaterno = $('#form_apaterno').val();
+    	    usuario = nombres.substr(0, 1) + apaterno;
+            $("#form_usuario").val(usuario.trim());
+	});
          
     });
 </script>
@@ -183,6 +190,16 @@
                 <div class="col-xs-12" style="margin-top: 10px;"></div>
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
+                        <span class="input-group-addon" style="width: 30%;">USUARIO &nbsp;<i class="fa fa-cogs"></i></span>
+                        <div class=""  >
+                            <input id="form_usuario" name="form_usuario" type="text"  class="form-control text-center text-uppercase" style="height: 32px; " maxlength="255"  >
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xs-12" style="margin-top: 10px;"></div>
+                <div class="col-xs-12" style="padding: 0px;">
+                    <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">EMAIL &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
                             <input id="form_email" name="form_email" type="text"  class="form-control text-center text-uppercase" style="height: 32px; " maxlength="255"  >
@@ -195,7 +212,7 @@
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">CONTRASEÑA &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
-                            <input id="form_password" name="form_password" type="password"  class="form-control" style="height: 32px; " maxlength="255"  >
+                            <input id="form_password" name="form_password" type="password"  class="form-control" style="height: 32px;" maxlength="255"  >
                         </div>
                     </div>
                 </div>
@@ -205,22 +222,12 @@
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">CARGO &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
-                            <select id='form_cargo' name="form_cargo" class="form-control text-uppercase text-center">
-                                <option value="0">--SELECCIONE UN ROL--</option>
+                            <select id='form_cargo' name="form_cargo" class="form-control text-uppercase text-center" style="height: 32px;">
+                                <option value="0">..:: SELECCIONE UN ROL ::..</option>
                                 @foreach($roles as $rol)
-                                <option value="{{$rol->id_rol}}">--{{$rol->descripcion}}--</option>
+                                <option value="{{$rol->id_rol}}">..:: {{$rol->descripcion}} ::..</option>
                                 @endforeach
                             </select> 
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-xs-12" style="margin-top: 10px;"></div>
-                <div class="col-xs-12" style="padding: 0px;">
-                    <div class="input-group input-group-md" style="width: 100%">
-                        <span class="input-group-addon" style="width: 30%;">USUARIO &nbsp;<i class="fa fa-cogs"></i></span>
-                        <div class=""  >
-                            <input id="form_usuario" name="form_usuario" type="text"  class="form-control text-center text-uppercase" style="height: 32px; " maxlength="255"  >
                         </div>
                     </div>
                 </div>
@@ -288,6 +295,16 @@
                 <div class="col-xs-12" style="margin-top: 10px;"></div>
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
+                        <span class="input-group-addon" style="width: 30%;">USUARIO &nbsp;<i class="fa fa-cogs"></i></span>
+                        <div class=""  >
+                            <input id="form_usuario_edit" name="form_usuario_edit" type="text"  class="form-control text-center text-uppercase" style="height: 32px; " maxlength="255"  >
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xs-12" style="margin-top: 10px;"></div>
+                <div class="col-xs-12" style="padding: 0px;">
+                    <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">EMAIL &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
                             <input id="form_email_edit" name="form_email_edit" type="text"  class="form-control text-center text-uppercase" style="height: 32px; " maxlength="255"  >
@@ -300,22 +317,12 @@
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">CARGO &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
-                            <select id='form_cargo_edit' name="form_cargo_edit" class="form-control text-uppercase text-center">
-                                <option value="0">--SELECCIONE UN ROL--</option>
+                            <select id='form_cargo_edit' name="form_cargo_edit" class="form-control text-uppercase text-center" style="height: 32px;">
+                                <option value="0">..:: SELECCIONE UN ROL ::..</option>
                                 @foreach($roles as $rol)
-                                <option value="{{$rol->id_rol}}">--{{$rol->descripcion}}--</option>
+                                <option value="{{$rol->id_rol}}">..:: {{$rol->descripcion}} ::..</option>
                                 @endforeach
                             </select> 
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-xs-12" style="margin-top: 10px;"></div>
-                <div class="col-xs-12" style="padding: 0px;">
-                    <div class="input-group input-group-md" style="width: 100%">
-                        <span class="input-group-addon" style="width: 30%;">USUARIO &nbsp;<i class="fa fa-cogs"></i></span>
-                        <div class=""  >
-                            <input id="form_usuario_edit" name="form_usuario_edit" type="text"  class="form-control text-center text-uppercase" style="height: 32px; " maxlength="255"  >
                         </div>
                     </div>
                 </div>

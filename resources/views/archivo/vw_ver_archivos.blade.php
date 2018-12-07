@@ -35,9 +35,9 @@
                                                 <div class="col-xs-12">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">DESCRIPCION<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
-                                                        <input type="text" id="vw_descripcion" class="form-control text-uppercase">
+                                                        <input type="text" id="vw_descripcion" class="form-control text-uppercase input-lg">
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-success" style="background-color:#D48411" type="button" onclick="buscar_descripcion();" title="BUSCAR">
+                                                            <button class="btn btn-success btn-lg" style="background-color:#D48411" type="button" onclick="buscar_descripcion();" title="BUSCAR">
                                                                 <i class="glyphicon glyphicon-search"></i>&nbsp;Buscar
                                                             </button>
                                                         </span>

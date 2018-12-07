@@ -26,7 +26,7 @@
                 </ol>
                 <div class="carousel-inner">
                         <!-- Slide 1 -->
-                        <div class="item active" style="width:1500px; max-height:750px">
+                        <div class="item active" style="max-width:1500px; max-height:750px">
                                 <img src="{{asset('img/img_cromotex/fondointranet-01.jpg')}}" alt="FLOTA CROMOTEX" class="img-fluid">
                                 <div class="carousel-caption caption-right">
                                     <h1><b>VIAJES CONFIABLES AL MEJOR PRECIO</b></h1>
@@ -38,7 +38,7 @@
                                 </div>
                         </div>
                         <!-- Slide 2 -->
-                        <div class="item" style="width:1500px; max-height:750px">
+                        <div class="item" style="max-width:1500px; max-height:750px">
                                 <img src="{{asset('img/img_cromotex/fondointranet-02.jpg')}}" alt="FOTO PANORAMICA DE NUESTRAS INSTALACIONES" class="img-fluid">
                                 <div class="carousel-caption caption-left">
                                     <h1><b>NOS RENOVAMOS PARA OFRECERTE UN MEJOR SERVICIO</b></h1>

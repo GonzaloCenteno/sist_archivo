@@ -98,27 +98,39 @@ class UsuariosController extends Controller
         }
         else
         {
-            $Usuario = new  Usuarios;
-            $val=  $Usuario::where("id","=",$request['id_usuario'])->first();
-            if($val)
+            $usuario = DB::table('usuarios')->where('usuario', strtoupper($request['form_usuario_edit']))->where('id','<>',$request['id_usuario'])->get();
+            if ($usuario->count() > 0) 
             {
-                $file = $request->file('form_foto_edit');
-                $val->dni         = $request['form_dni_edit'];
-                $val->nombres     = strtoupper($request['form_nombres_edit']);
-                $val->apaterno    = strtoupper($request['form_apaterno_edit']);
-                $val->amaterno    = strtoupper($request['form_amaterno_edit']);
-                $val->email       = strtoupper($request['form_email_edit']);
-                $val->id_rol      = $request['form_cargo_edit'];
-
-                if ($file) {
-                    $file_1 = \File::get($file);
-                    $val->foto = base64_encode($file_1);
-                }else{
-                    $val->foto = "-";
-                }
-                $val->save();
+                return response()->json([
+                'msg' => 'usuario_ok',
+                ]);
             }
-            return $request['id_usuario'];
+            else
+            {
+                $Usuario = new  Usuarios;
+                $val=  $Usuario::where("id","=",$request['id_usuario'])->first();
+                $datos = DB::table('usuarios')->where('id',$request['id_usuario'])->get();
+                if($val)
+                {
+                    $file = $request->file('form_foto_edit');
+                    $val->dni         = $request['form_dni_edit'];
+                    $val->nombres     = strtoupper($request['form_nombres_edit']);
+                    $val->apaterno    = strtoupper($request['form_apaterno_edit']);
+                    $val->amaterno    = strtoupper($request['form_amaterno_edit']);
+                    $val->email       = strtoupper($request['form_email_edit']);
+                    $val->usuario     = strtoupper($request['form_usuario_edit']);
+                    $val->id_rol      = $request['form_cargo_edit'];
+
+                    if ($file) {
+                        $file_1 = \File::get($file);
+                        $val->foto = base64_encode($file_1);
+                    }else{
+                        $val->foto = $datos[0]->foto;
+                    }
+                    $val->save();
+                }
+                return $request['id_usuario'];
+            }
         }
     }
     
@@ -161,27 +173,37 @@ class UsuariosController extends Controller
         }
         else
         {
-            $file = $request->file('form_foto');
-            $Usuario = new  Usuarios;
-            $Usuario->dni         = $request['form_dni'];
-            $Usuario->nombres     = strtoupper($request['form_nombres']);
-            $Usuario->apaterno    = strtoupper($request['form_apaterno']);
-            $Usuario->amaterno    = strtoupper($request['form_amaterno']);
-            $Usuario->email       = strtoupper($request['form_email']);
-            $Usuario->password    = bcrypt($request['form_password']);
-            $Usuario->id_rol      = $request['form_cargo'];
-            $Usuario->usuario     = strtoupper($request['form_usuario']);
-            
-            if ($file) {
-                $file_1 = \File::get($file);
-                $Usuario->foto = base64_encode($file_1);
-            }else{
-                $Usuario->foto = "-";
-            }
-            
+            $usuario = DB::table('usuarios')->where('usuario',strtoupper($request['form_usuario']))->get();
+            if ($usuario->count() > 0) 
+            {
+                return response()->json([
+                'msg' => 'usuario_ok',
+                ]);
+            }   
+            else
+            {
+                $file = $request->file('form_foto');
+                $Usuario = new  Usuarios;
+                $Usuario->dni         = $request['form_dni'];
+                $Usuario->nombres     = strtoupper($request['form_nombres']);
+                $Usuario->apaterno    = strtoupper($request['form_apaterno']);
+                $Usuario->amaterno    = strtoupper($request['form_amaterno']);
+                $Usuario->email       = strtoupper($request['form_email']);
+                $Usuario->password    = bcrypt($request['form_password']);
+                $Usuario->id_rol      = $request['form_cargo'];
+                $Usuario->usuario     = strtoupper($request['form_usuario']);
 
-            $Usuario->save();
-            return $Usuario->id; 
+                if ($file) {
+                    $file_1 = \File::get($file);
+                    $Usuario->foto = base64_encode($file_1);
+                }else{
+                    $Usuario->foto = "-";
+                }
+
+
+                $Usuario->save();
+                return $Usuario->id; 
+            }
         } 
     }
     

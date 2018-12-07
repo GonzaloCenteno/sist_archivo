@@ -75,21 +75,21 @@ class ArchivoController extends Controller
     public function ver_archivos(Request $request)
     {
         $sql = DB::table('principal.vw_archivos')->where('id_archivo',$request['id_archivo'])->first();
-        if($sql)
+        if(file_exists(storage_path('app/' . $sql->ruta)))
         {
             $ruta = \Storage::response($sql->ruta);
             return $ruta;
         }
         else
         {
-            return "No hay Archvos";
+            return "EL ARCHIVO NO EXISTE, O FUE ELIMINADO";
         }
     }
     
     public function descargar_archivos($id_archivo)
     {
         $archivo = DB::table('principal.vw_archivos')->where('id_archivo',$id_archivo)->first();
-        if ($archivo) 
+        if (file_exists(storage_path('app/' . $archivo->ruta))) 
         {
             //dd($archivo);
             //return \Storage::response(storage_path('app/public/' . $archivo->usuario . '/' . $archivo->archivo));
@@ -102,7 +102,7 @@ class ArchivoController extends Controller
         }
         else 
         {
-            return 0;
+            return "EL ARCHIVO NO EXISTE, O FUE ELIMINADO";
         }
     }
     
@@ -138,7 +138,7 @@ class ArchivoController extends Controller
         foreach ($sql as $Index => $Datos) {
             $Lista->rows[$Index]['id'] = $Datos->id_archivo; 
             $nuevo = '<a class="btn btn-labeled btn-sm" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a>';
-            $ver = '<button class="btn btn-labeled btn-success" style="background-color:#D48411;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
+            $ver = '<button class="btn btn-labeled btn-lg" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),
                 trim($Datos->descripcion),

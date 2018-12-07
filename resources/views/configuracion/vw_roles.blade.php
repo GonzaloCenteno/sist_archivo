@@ -298,10 +298,6 @@
                     <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411;" onclick="fn_edit_mod()">
                         <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> EDITAR
                     </button>
-                    <button id="btn_delmod" data-token="{{ csrf_token() }}" type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C;" onclick="fn_borrar_Modulo()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> BORRAR
-                    </button>
-                    
             </ul>
         </div>
     </div>
@@ -317,9 +313,6 @@
                     </button>
                     <button type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#D48411;" onclick="fn_edit_submod()">
                         <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> EDITAR
-                    </button>
-                    <button id="btn_delsubmod" data-token="{{ csrf_token() }}" type="button" class="btn btn-labeled txt-color-white btn-lg" style="background-color:#CC191C;" onclick="fn_borrar_subModulo()">
-                        <span class="cr-btn-label"><i class="glyphicon glyphicon-edit"></i></span> BORRAR
                     </button>
             </ul>
         </div>
