@@ -481,7 +481,7 @@ function MensajeAlerta(tit,cont,dura)
     $.smallBox({
                     title : tit,
                     content : "<i class='fa fa-clock-o'></i> <i>"+cont+"</i>",
-                    color : "#C46A69",
+                    color : "#CC191C",
                     iconSmall : "fa fa-check fa-2x fadeInRight animated",
                     timeout : dura || 5000
             });
@@ -489,9 +489,9 @@ function MensajeAlerta(tit,cont,dura)
 function sin_permiso()
 {
     $.smallBox({
-                    title : 'No tiene Permiso de Usar este Boton',
-                    content : "<i class='fa fa-clock-o'></i> <i>Comuniquese con el Admin</i>",
-                    color : "#C46A69",
+                    title : 'NO TIENE PERMISO PARA UTILIZAR ESTE BOTON',
+                    content : "<i class='fa fa-clock-o'></i> <i>COMUNIQUESE CON EL ADMINISTRADOR</i>",
+                    color : "#CC191C",
                     iconSmall : "fa fa-check fa-2x fadeInRight animated",
                     timeout : 5000
             });

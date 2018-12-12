@@ -29,7 +29,7 @@
                                     <section style="padding-right: 0px">
                                         <div class="col-xs-12">
                                             <div class="box-header with-border">
-                                                <center><h1 style="color:#CC191C"><b>REGISTRO - ARCHIVOS</b></h1></center>
+                                                <center><h1 style="color:#CC191C"><b>REGISTRO - VER ARCHIVOS</b></h1></center>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
@@ -82,7 +82,7 @@
             height: '550px', autowidth: true,
             toolbarfilter: true,
             colNames: ['ID', 'DESCRIPCION', 'ARCHIVO', 'TIPO ARCHIVO', 'FECHA REGISTRO', 'VER ARCHIVO'],
-            rowNum: 50, sortname: 'id_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS ASIGNADOS', align: "center",
+            rowNum: 50, sortname: 'descripcion_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS ASIGNADOS', align: "center",
             colModel: [
                 {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},
                 {name: 'descripcion_archivo', index: 'descripcion_archivo', align: 'left', width: 50},

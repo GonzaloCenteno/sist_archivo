@@ -100,3 +100,54 @@ function ver_archivos(id_archivo)
 {
     window.open('archivos/0?id_archivo='+id_archivo+'&mostrar=archivo');   
 }
+
+function eliminar_archivo()
+{
+    id_archivo = $('#tabla_archivos').jqGrid ('getGridParam', 'selrow');
+    if(id_archivo)
+    {
+        archivo = $('#tabla_archivos').jqGrid ('getCell', id_archivo, 'archivo');
+        MensajeDialogLoadAjax('tabla_archivos', '.:: Cargando ...');
+        $.confirm({
+            title: '.: CUIDADO :.!',
+            content: '¿ESTA SEGURO DE ELIMINAR EL SIGUIENTE ARCHIVO?&nbsp;&nbsp;&nbsp;&nbsp;<b>'+archivo+'</b>',
+            buttons: {
+                Confirmar: function () {
+                    $.ajax({
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: 'archivos/destroy',
+                        type: 'POST',
+                        data: {_method: 'delete', id_archivo: id_archivo},
+                        success: function (data) 
+                        {
+                           if (data > 0) 
+                            {
+                                fn_actualizar_grilla('tabla_archivos');
+                                MensajeExito("MENSAJE DE EXITO","EL ARCHIVO FUE ELIMINADO...",4000)
+                                MensajeDialogLoadAjaxFinish('tabla_archivos');
+                            }
+                            else
+                            {
+                                MensajeDialogLoadAjaxFinish('tabla_archivos');
+                                 mostraralertas("hubo un error, Comunicar al Administrador");
+                            }
+                        },
+                        error: function (data) {
+                            MensajeDialogLoadAjaxFinish('tabla_archivos');
+                            MensajeAlerta('Eliminar Archivo', id_archivo + ' - No se pudo Eliminar.');
+                        }
+                    });
+                },
+                Cancelar: function () {
+                    MensajeDialogLoadAjaxFinish('tabla_archivos');
+                    MensajeAlerta('ELIMINAR ARCHIVO','OPERACION CANCELADA');
+                }
+
+            }
+        });
+    }
+    else
+    {
+        mostraralertasconfoco("NO HAY REGISTROS SELECCIONADOS","#tabla_archivos");
+    }
+}

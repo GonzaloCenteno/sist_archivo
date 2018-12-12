@@ -283,10 +283,41 @@ function resetear_clave()
             }
             else
             {
+                MensajeDialogLoadAjaxFinish('dialog_editar_usuario');
                  mostraralertas("hubo un error, Comunicar al Administrador");
             }
         },
         error: function(data) {
+            MensajeDialogLoadAjaxFinish('dialog_editar_usuario');
+            mostraralertas("hubo un error, Comunicar al Administrador");
+            console.log('error');
+            console.log(data);
+        }
+    });
+}
+
+function cambiar_estado_usuario(id_usuario,estado)
+{
+    MensajeDialogLoadAjax('tabla_usuarios', '.:: Cargando ...');
+
+    $.ajax({url: 'usuarios/0?datos=cambiar_estado&id_usuario='+id_usuario+'&estado='+estado,
+        type: 'GET',
+        success: function(data) 
+        {
+            if (data > 0) 
+            {
+                fn_actualizar_grilla('tabla_usuarios');
+                MensajeExito("MENSAJE DE EXITO","EL ESTADO DEL USUARIO FUE CAMBIADO...",4000)
+                MensajeDialogLoadAjaxFinish('tabla_usuarios');
+            }
+            else
+            {
+                MensajeDialogLoadAjaxFinish('tabla_usuarios');
+                 mostraralertas("hubo un error, Comunicar al Administrador");
+            }
+        },
+        error: function(data) {
+            MensajeDialogLoadAjaxFinish('tabla_usuarios');
             mostraralertas("hubo un error, Comunicar al Administrador");
             console.log('error');
             console.log(data);

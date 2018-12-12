@@ -15,6 +15,7 @@ class ArchivoController extends Controller
     {
         if( Auth::user() )
         {
+            $sesion = DB::table('usuarios')->where('id',Auth::user()->id)->where('estado',1)->get();
             $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_archivos')->where('id_rol',Auth::user()->id_rol)->get();
             $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
             $tipo_archivo = DB::table('principal.vw_ver_tipos_archivos')->where('id',Auth::user()->id)->get();
@@ -22,7 +23,15 @@ class ArchivoController extends Controller
             {
                 return view('errors/sin_permiso',compact('menu','permisos'));
             }
+            else if($sesion->count() == 0)
+            {
+                Auth::logout();
+                return view('auth/login');
+            }
+            else
+            {
                 return view('archivo/vw_archivos',compact('menu','permisos','tipo_archivo'));
+            }     
         }
         else
         {
@@ -61,7 +70,14 @@ class ArchivoController extends Controller
 
     public function destroy(Request $request)
     {
-        
+        $Archivos = new Archivos;
+        $val=  $Archivos::where("id_archivo","=",$request['id_archivo'])->first();
+        if($val)
+        {
+            $val->id_estado = 2;
+            $val->save();
+        }
+        return $request['id_archivo'];
     }
 
     public function store(Request $request)
@@ -117,8 +133,8 @@ class ArchivoController extends Controller
         if ($start < 0) {
             $start = 0;
         }
-        $totalg = DB::select("select count(*) as total from principal.vw_archivos where descripcion like '%".strtoupper($request['descripcion'])."%' and id_usuario = '".Auth::user()->id."'");
-        $sql = DB::table('principal.vw_archivos')->where('descripcion','like', '%'.strtoupper($request['descripcion']).'%')->where('id_usuario',Auth::user()->id)->orderBy($sidx, $sord)->limit($limit)->offset($start)->get();
+        $totalg = DB::select("select count(*) as total from principal.vw_archivos where descripcion like '%".strtoupper($request['descripcion'])."%' and id_usuario = '".Auth::user()->id."' and id_estado = 1");
+        $sql = DB::table('principal.vw_archivos')->where('descripcion','like', '%'.strtoupper($request['descripcion']).'%')->where('id_usuario',Auth::user()->id)->where('id_estado',1)->orderBy($sidx, $sord)->limit($limit)->offset($start)->get();
 
         $total_pages = 0;
         if (!$sidx) {

@@ -15,6 +15,7 @@ class UsuariosController extends Controller
     {
         if( Auth::user() )
         {
+            $sesion = DB::table('usuarios')->where('id',Auth::user()->id)->where('estado',1)->get();
             $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_usuarios')->where('id_rol',Auth::user()->id_rol)->get();
             $menu = DB::select('SELECT * from permisos.vw_permisos where id_rol='.Auth::user()->id_rol);
             $roles = DB::table('principal.roles')->orderBy('descripcion','asc')->get();
@@ -22,7 +23,15 @@ class UsuariosController extends Controller
             {
                 return view('errors/sin_permiso',compact('menu','permisos'));
             }
+            else if($sesion->count() == 0)
+            {
+                Auth::logout();
+                return view('auth/login');
+            }
+            else
+            {
                 return view('configuracion/vw_usuarios',compact('menu','permisos','roles'));
+            }  
         }
         else
         {
@@ -48,6 +57,10 @@ class UsuariosController extends Controller
             if ($request['grid'] == 'usuarios') 
             {
                 return $this->crear_tabla_usuarios($request);
+            }
+            if ($request['datos'] == 'cambiar_estado') 
+            {
+                return $this->cambiar_est_usuario($request);
             }
         }
     }
@@ -89,7 +102,7 @@ class UsuariosController extends Controller
     
     public function editar_datos_usuario(Request $request)
     {
-        $sql = DB::table('usuarios')->where('dni',$request['form_dni_edit'])->where('id','<>',$request['id_usuario'])->get();
+        $sql = DB::table('usuarios')->where('dni',strtoupper($request['form_dni_edit']))->where('id','<>',$request['id_usuario'])->get();
         
         if ($sql->count() > 0) {
             return response()->json([
@@ -246,11 +259,11 @@ class UsuariosController extends Controller
             $Lista->rows[$Index]['id'] = $Datos->id;   
             if ($Datos->estado == 1) 
             {
-                $var = 'ACTIVO';
+                $var = '<button class="btn btn-labeled btn-sm" style="background-color:#D48411;color:white;" type="button" onclick="cambiar_estado_usuario('.trim($Datos->id).',0)"><span class="btn-label"><i class="fa fa-check"></i></span> ACTIVO</button>';
             }
             else
             {
-                $var = 'INACTIVO';
+                $var = '<button class="btn btn-labeled btn-sm" style="background-color:#CC191C;color:white;" type="button" onclick="cambiar_estado_usuario('.trim($Datos->id).',1)"><span class="btn-label"><i class="fa fa-stop-circle"></i></span> INACTIVO</button>';
             }
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id),
@@ -276,6 +289,18 @@ class UsuariosController extends Controller
             $val->save();
         }
         return $id_usuario;
+    }
+    
+    public function cambiar_est_usuario(Request $request)
+    {
+        $Usuario = new  Usuarios;
+        $val=  $Usuario::where("id","=",$request['id_usuario'])->first();
+        if($val)
+        {
+            $val->estado = $request['estado'];
+            $val->save();
+        }
+        return $request['id_usuario'];
     }
 
 }

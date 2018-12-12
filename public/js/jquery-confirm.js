@@ -1195,7 +1195,7 @@ var jconfirm, Jconfirm;
         closeIcon: true,
         closeIconClass: false,
         watchInterval: 100,
-        columnClass: 'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1',
+        columnClass: 'col-md-6 col-md-offset-3 col-sm-3 col-sm-offset-3 col-xs-10 col-xs-offset-6',
         boxWidth: '50%',
         scrollToPreviousElement: true,
         scrollToPreviousElementAnimate: true,

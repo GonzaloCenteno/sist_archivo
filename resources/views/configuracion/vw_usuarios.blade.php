@@ -95,7 +95,7 @@
             height: '550px', autowidth: true,
             toolbarfilter: true,
             colNames: ['ID', 'DNI', 'PERSONA', 'EMAIL', 'CARGO', 'USUARIO', 'ESTADO','ROL'],
-            rowNum: 50, sortname: 'id', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE USUARIOS REGISTRADOS', align: "center",
+            rowNum: 50, sortname: 'persona', sortorder: 'asc', viewrecords: true, caption: 'LISTA DE USUARIOS REGISTRADOS', align: "center",
             colModel: [
                 {name: 'id', index: 'id', align: 'left',width: 20, hidden: true},
                 {name: 'dni', index: 'dni', align: 'center', width: 10},

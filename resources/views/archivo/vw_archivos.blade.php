@@ -29,10 +29,10 @@
                                     <section style="padding-right: 0px">
                                         <div class="col-xs-12">
                                             <div class="box-header with-border">
-                                                <center><h1 style="color:#CC191C"><b>REGISTRO - ARCHIVO</b></h1></center>
+                                                <center><h1 style="color:#CC191C"><b>REGISTRO - SUBIR ARCHIVO</b></h1></center>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-9">
+                                                <div class="col-xs-7">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">DESCRIPCION<i class="icon-append fa fa-male" style="margin-left: 5px;"></i></span>
                                                         <input type="text" id="vw_descripcion" class="form-control text-uppercase input-lg">
@@ -44,7 +44,7 @@
                                                     </div>                                            
                                                 </div>
                                                 
-                                                <div class="col-xs-3">
+                                                <div class="col-xs-5">
                                                     <div class="text-right">
                                                         @if( $permisos[0]->btn_new ==1 )
                                                             <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="crear_nuevo_archivo();">
@@ -53,6 +53,15 @@
                                                         @else
                                                             <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="sin_permiso();">
                                                                 <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>SUBIR ARCHIVOS
+                                                            </button>
+                                                        @endif
+                                                        @if( $permisos[0]->btn_del ==1 )
+                                                            <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="eliminar_archivo();">
+                                                                <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>ELIMINAR ARCHIVO
+                                                            </button>
+                                                        @else
+                                                            <button type="button" class="btn btn-labeled btn-lg txt-color-white" style="background-color:#D48411" onclick="sin_permiso();">
+                                                                <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>ELIMINAR ARCHIVO
                                                             </button>
                                                         @endif
                                                     </div>
@@ -116,7 +125,18 @@
                         }
                 },
             onSelectRow: function (Id){},
-            ondblClickRow: function (Id){}
+            ondblClickRow: function (Id)
+            {
+                perms = {!! json_encode($permisos[0]->btn_del) !!};
+                if(perms == 1)
+                {
+                    eliminar_archivo();
+                }
+                else
+                {
+                    sin_permiso();
+                }
+            }
         });
         
         $("#vw_descripcion").keypress(function (e) {

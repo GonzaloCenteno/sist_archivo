@@ -104,7 +104,7 @@
             height: '550px', autowidth: true,
             toolbarfilter: true,
             colNames: ['ID', 'DESCRIPCION - TIPO ARCHIVO'],
-            rowNum: 50, sortname: 'id_tipo_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE TIPOS DE ARCHIVOS', align: "center",
+            rowNum: 50, sortname: 'id_tipo_archivo', sortorder: 'asc', viewrecords: true, caption: 'LISTA DE TIPOS DE ARCHIVOS', align: "center",
             colModel: [
                 {name: 'id_tipo_archivo', index: 'id_tipo_archivo', align: 'center',width: 20},
                 {name: 'descripcion', index: 'descripcion', align: 'left', width: 80}
