@@ -214,7 +214,7 @@ var jconfirm, Jconfirm;
             this.$content = this.$el.find('div.jconfirm-content');
             this.$contentPane = this.$el.find('.jconfirm-content-pane');
             this.$icon = this.$el.find('.jconfirm-icon-c');
-            this.$closeIcon = this.$el.find('.jconfirm-closeIcon');
+            //this.$closeIcon = this.$el.find('.jconfirm-closeIcon');
             // this.$content.css(this._getCSS(this.animationSpeed, this.animationBounce));
             this.$btnc = this.$el.find('.jconfirm-buttons');
             this.$scrollPane = this.$el.find('.jconfirm-scrollpane');
@@ -662,46 +662,7 @@ var jconfirm, Jconfirm;
                 this.closeIcon = true;
             }
 
-            if (this.closeIcon) {
-                if (this.closeIconClass) {
-                    // user requires a custom class.
-                    var closeHtml = '<i class="' + this.closeIconClass + '"></i>';
-                    this.$closeIcon.html(closeHtml);
-                }
-
-                this.$closeIcon.click(function (e) {
-                    e.preventDefault();
-
-                    var buttonName = false;
-                    var shouldClose = false;
-                    var str;
-
-                    if (typeof that.closeIcon == 'function') {
-                        str = that.closeIcon();
-                    } else {
-                        str = that.closeIcon;
-                    }
-
-                    if (typeof str == 'string' && typeof that.buttons[str] != 'undefined') {
-                        buttonName = str;
-                        shouldClose = false;
-                    } else if (typeof str == 'undefined' || !!(str) == true) {
-                        shouldClose = true;
-                    } else {
-                        shouldClose = false;
-                    }
-                    if (buttonName) {
-                        var btnResponse = that.buttons[buttonName].action.apply(that);
-                        shouldClose = (typeof btnResponse == 'undefined') || !!(btnResponse);
-                    }
-                    if (shouldClose) {
-                        that.close();
-                    }
-                });
-                this.$closeIcon.show();
-            } else {
-                this.$closeIcon.hide();
-            }
+            
         },
         setTitle: function (string, force) {
             force = force || false;
@@ -1147,7 +1108,6 @@ var jconfirm, Jconfirm;
         '<div class="jc-bs3-row">' +
         '<div class="jconfirm-box-container">' +
         '<div class="jconfirm-box" role="dialog" aria-labelledby="labelled" tabindex="-1">' +
-        '<div class="jconfirm-closeIcon">&times;</div>' +
         '<div class="jconfirm-title-c">' +
         '<span class="jconfirm-icon-c"></span>' +
         '<span class="jconfirm-title"></span></div>' +

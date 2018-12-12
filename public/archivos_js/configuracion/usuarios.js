@@ -251,7 +251,7 @@ function editar_usuario(valor)
                 }
                 else
                 {
-                    MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000);
+                    MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE MODIFICADO CORRECTAMENTE...",4000);
                     MensajeDialogLoadAjaxFinish('dlg_editar_usuario');
                     $("#dlg_editar_usuario").dialog("close");
                     fn_actualizar_grilla('tabla_usuarios');
@@ -269,7 +269,7 @@ function editar_usuario(valor)
 function resetear_clave()
 {
     id_usuario = $('#tabla_usuarios').jqGrid ('getGridParam', 'selrow');
-    MensajeDialogLoadAjax('dialog_editar_usuario', '.:: Cargando ...');
+    MensajeDialogLoadAjax('dlg_editar_usuario', '.:: Cargando ...');
 
     $.ajax({url: 'usuarios/'+id_usuario+'?show=resetear_clave',
         type: 'GET',
@@ -278,17 +278,18 @@ function resetear_clave()
             if (data > 0) 
             {
                 fn_actualizar_grilla('tabla_usuarios');
-                MensajeExito("MENSAJE DE EXITO","LA CONTRASEÑA FUE CAMBIADA CORRECTAMENTE...",4000)
-                MensajeDialogLoadAjaxFinish('dialog_editar_usuario');
+                MensajeExito("MENSAJE DE EXITO","LA CONTRASEÑA FUE CAMBIADA CORRECTAMENTE...",4000);
+                $("#dlg_editar_usuario").dialog("close");
+                MensajeDialogLoadAjaxFinish('dlg_editar_usuario');
             }
             else
             {
-                MensajeDialogLoadAjaxFinish('dialog_editar_usuario');
+                MensajeDialogLoadAjaxFinish('dlg_editar_usuario');
                  mostraralertas("hubo un error, Comunicar al Administrador");
             }
         },
         error: function(data) {
-            MensajeDialogLoadAjaxFinish('dialog_editar_usuario');
+            MensajeDialogLoadAjaxFinish('dlg_editar_usuario');
             mostraralertas("hubo un error, Comunicar al Administrador");
             console.log('error');
             console.log(data);

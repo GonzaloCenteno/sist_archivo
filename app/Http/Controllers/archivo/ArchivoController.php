@@ -26,7 +26,7 @@ class ArchivoController extends Controller
             else if($sesion->count() == 0)
             {
                 Auth::logout();
-                return view('auth/login');
+                return redirect('/');
             }
             else
             {
