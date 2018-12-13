@@ -205,7 +205,7 @@
         <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
 
         <script src="{{ asset('js/plugin/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <script src="{{ asset('js/plugin/jqgrid/grid.locale-en.min.js') }}"></script>
+        <script src="{{ asset('js/plugin/jqgrid/grid.locale-es.js') }}"></script>
 
         <script src="{{ asset('js/plugin/masked-input/jquery.maskedinput.min.js') }}"></script>
 
