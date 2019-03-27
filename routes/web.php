@@ -50,6 +50,13 @@ Route::group(['middleware' => 'auth'], function()
         Route::resource('ver_archivos', 'Ver_Archivos_Controller');
         route::get('desc_archivos_asignados/{id_archivo}', 'Ver_Archivos_Controller@descargar_archivos_asignados')->name('desc_archivos_asignados');
     });
+    
+    Route::group(['namespace' => 'soap'], function() 
+    {
+        Route::resource('tickets', 'TicketController');
+        Route::get('llamar_soap','TicketController@traer_datos');
+        Route::get('traer_datos', 'SoapController@prueba');
+    });
 
     Route::get('/home', 'HomeController@index')->name('inicio');
 

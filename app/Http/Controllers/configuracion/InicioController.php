@@ -43,7 +43,8 @@ class InicioController extends Controller
 
     public function create(Request $request)
     {
-        
+        Auth::logout();
+        return redirect('/');
     }
 
     public function edit($id_tipo_archivo,Request $request)

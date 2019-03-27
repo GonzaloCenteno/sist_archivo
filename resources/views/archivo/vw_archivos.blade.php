@@ -104,16 +104,15 @@
             datatype: 'json', mtype: 'GET',
             height: '550px', autowidth: true,
             toolbarfilter: true,
-            colNames: ['ID', 'DESCRIPCION', 'ARCHIVO', 'TIPO ARCHIVO', 'FECHA REGISTRO', 'DESCARGAR ARCHIVO', 'VER ARCHIVO'],
+            colNames: ['ID', 'DESCRIPCION ARCHIVO', 'TIPO ARCHIVO', 'FECHA REGISTRO', 'DESCARGAR ARCHIVO', 'VER ARCHIVO'],
             rowNum: 50, sortname: 'id_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS REGISTRADOS', align: "center",
             colModel: [
                 {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},
-                {name: 'descripcion', index: 'descripcion', align: 'left', width: 50},
-                {name: 'archivo', index: 'archivo', align: 'left', width: 35},
+                {name: 'descripcion', index: 'descripcion', align: 'left', width: 45},
                 {name: 'tipo_archivo', index: 'tipo_archivo', align: 'left', width: 25},
-                {name: 'fecha_registro', index: 'fecha_registro', align: 'center', width: 15},
-                {name: 'nuevo', index: 'nuevo', align: 'center', width: 20},
-                {name: 'ver', index: 'ver', align: 'center', width: 20}
+                {name: 'fecha_registro', index: 'fecha_registro', align: 'center', width: 25},
+                {name: 'nuevo', index: 'nuevo', align: 'center', width: 30},
+                {name: 'ver', index: 'ver', align: 'center', width: 30}
             ],
             pager: '#paginador_tabla_archivos',
             rowList: [10, 20, 30, 40, 50],
@@ -167,15 +166,6 @@
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
                 <form id="FormularioArchivo" name="FormularioArchivo" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
-                
-                <div class="col-xs-12" style="padding: 0px;">
-                    <div class="input-group input-group-md" style="width: 100%">
-                        <span class="input-group-addon" style="width: 30%;">DESCRIPCION &nbsp;<i class="fa fa-cogs"></i></span>
-                        <div class="">
-                            <input id="descripcion" name="descripcion" type="text" class="form-control text-center text-uppercase" style="height: 32px;" >
-                        </div>
-                    </div>
-                </div>
                 
                 <div class="col-xs-12" style="margin-top: 10px;"></div>
                 <div class="col-xs-12" style="padding: 0px;">

@@ -76,9 +76,9 @@
                             <li>
                                 <a onclick="cambiar_foto_usuario();" class="padding-10 padding-top-0 padding-bottom-0" style="cursor: pointer;margin-bottom: 4px;"><i class="fa fa-cog"></i> Cambiar Foto</a>
                             </li>                            
-                            <li>
+<!--                            <li>
                                 <a onclick="cambiar_password();" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Cambiar Password</a>
-                            </li>                            
+                            </li>                            -->
                         </ul>
                     </li>
                 </ul>
@@ -248,6 +248,34 @@
                         autoOpen: false,modal:true,title: "<div class='widget-header'><h4>.: Mensaje del Sistema :.</h4></div>", buttons: [ { html: '<span class="btn-label"><i class="glyphicon glyphicon-check"></i></span>&nbsp; Aceptar',
                         "class": "btn btn-labeled bg-color-blue txt-color-white", click: function() { $( this ).dialog( "close" );  if(focoglobal!=""){ foco(focoglobal);} focoglobal="";} } ]
                 });
+                
+                var n = 0;
+                window.setInterval(function(){
+                    n++;
+                    console.log(n);
+                    if (n == 100000) 
+                    {
+                        cerrar_sesion();
+                    }
+                },1000);
+                
+                function cerrar_sesion(){
+                    $.ajax({
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: 'inicio/create',
+                        type: 'GET',
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        complete: function (data) 
+                        {
+                           window.location.href = "{{URL::to('/')}}"
+                        }
+                    });
+                }
+                
+                document.oncontextmenu = function(){return false;}
+                
             });                       
         </script>
         @endif

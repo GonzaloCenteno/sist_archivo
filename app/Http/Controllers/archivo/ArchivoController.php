@@ -63,9 +63,16 @@ class ArchivoController extends Controller
     
     }
 
-    public function edit($id_usuario,Request $request)
+    public function edit($id_archivo,Request $request)
     {
-              
+        $Archivos = new Archivos;
+        $val=  $Archivos::where("id_archivo","=",$id_archivo)->first();
+        if($val)
+        {
+            $val->estado = $request['est'];
+            $val->save();
+        }
+        return $id_archivo;
     }
 
     public function destroy(Request $request)
@@ -152,13 +159,27 @@ class ArchivoController extends Controller
         $Lista->total = $total_pages;
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
-            $Lista->rows[$Index]['id'] = $Datos->id_archivo; 
-            $nuevo = '<a class="btn btn-labeled btn-sm" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a>';
-            $ver = '<button class="btn btn-labeled btn-lg" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button>';
+            $Lista->rows[$Index]['id'] = $Datos->id_archivo;
+            if ($Datos->est == 1) 
+            {
+                $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onchange="permisos_archivos('.trim($Datos->id_archivo).',0)"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+            }
+            else
+            {
+                $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onchange="permisos_archivos('.trim($Datos->id_archivo).',1)"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+            }
+            
+            if ($Datos->est == 2) 
+            {
+                $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onchange="permisos_archivos('.trim($Datos->id_archivo).',0)"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+            }
+            else
+            {
+                $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onchange="permisos_archivos('.trim($Datos->id_archivo).',2)"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+            }
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),
                 trim($Datos->descripcion),
-                trim($Datos->archivo),
                 trim($Datos->tipo_archivo),
                 trim($Datos->fecha_registro),
                 $nuevo,
@@ -183,8 +204,8 @@ class ArchivoController extends Controller
                 $Archivos                  = new Archivos;
                 $Archivos->id_usuario      = Auth::user()->id;
                 $Archivos->id_tipo_archivo = $request['id_tipo_archivo'];
-                $Archivos->descripcion     = strtoupper($request['descripcion']);
-                $Archivos->archivo         = date('Y-m-d'). '_' .$nombre;
+                $Archivos->descripcion     = strtoupper($nombre);
+                $Archivos->archivo         = date('Y-m-d'). '_' .date('H:i:s'). '_' .$nombre;
                 $Archivos->mimetype        = $tipo;
                 $Archivos->ruta            = $ruta;
                 $Archivos->fecha_registro  = date('Y-m-d');

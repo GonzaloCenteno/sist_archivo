@@ -104,7 +104,7 @@
             height: '550px', autowidth: true,
             toolbarfilter: true,
             colNames: ['ID', 'CODIGO', 'DESCRIPCION'],
-            rowNum: 50, sortname: 'id_rol', sortorder: 'asc', viewrecords: true, caption: 'LISTA DE ROLES', align: "center",
+            rowNum: 10, sortname: 'id_rol', sortorder: 'asc', viewrecords: true, caption: 'LISTA DE ROLES', align: "center",
             colModel: [
                 {name: 'id_rol', index: 'id_rol', align: 'center',width: 10},
                 {name: 'codigo', index: 'codigo', align: 'left', width: 30},

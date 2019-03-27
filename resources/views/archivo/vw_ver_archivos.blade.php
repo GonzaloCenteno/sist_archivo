@@ -81,7 +81,7 @@
             datatype: 'json', mtype: 'GET',
             height: '550px', autowidth: true,
             toolbarfilter: true,
-            colNames: ['ID', 'DESCRIPCION', 'ARCHIVO', 'TIPO ARCHIVO', 'FECHA REGISTRO', 'VER ARCHIVO'],
+            colNames: ['ID', 'DESCRIPCION ARCHIVO', 'ARCHIVO', 'TIPO ARCHIVO', 'FECHA REGISTRO', 'VER ARCHIVO'],
             rowNum: 50, sortname: 'descripcion_archivo', sortorder: 'desc', viewrecords: true, caption: 'LISTA DE ARCHIVOS ASIGNADOS', align: "center",
             colModel: [
                 {name: 'id_archivo', index: 'id_archivo', align: 'left',width: 20, hidden: true},

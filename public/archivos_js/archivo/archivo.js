@@ -42,14 +42,8 @@ function limpiar_formulario()
 
 function guardar_archivo()
 {
-    descripcion = $('#descripcion').val();
     archivo = $('#file').val();
     id_tipo_archivo = $('#id_tipo_archivo').val();
-    
-    if (descripcion == '') {
-        mostraralertasconfoco('* DEBES AGREGAR UNA DESCRIPCION...', '#descripcion');
-        return false;
-    }
     
     if (id_tipo_archivo == '0') {
         mostraralertasconfoco('* DEBE SELECCIONAR UNA OPCION...', '#id_tipo_archivo');
@@ -106,11 +100,11 @@ function eliminar_archivo()
     id_archivo = $('#tabla_archivos').jqGrid ('getGridParam', 'selrow');
     if(id_archivo)
     {
-        archivo = $('#tabla_archivos').jqGrid ('getCell', id_archivo, 'archivo');
+        archivo = $('#tabla_archivos').jqGrid ('getCell', id_archivo, 'descripcion');
         MensajeDialogLoadAjax('tabla_archivos', '.:: Cargando ...');
         $.confirm({
             title: '.: CUIDADO :.!',
-            content: '¿ESTA SEGURO DE ELIMINAR EL SIGUIENTE ARCHIVO?&nbsp;&nbsp;&nbsp;&nbsp;<b>'+archivo+'</b>',
+            content: '¿ESTA SEGURO DE ELIMINAR EL SIGUIENTE ARCHIVO?&nbsp;&nbsp;<b>'+archivo+'</b>',
             buttons: {
                 Confirmar: function () {
                     $.ajax({
@@ -150,4 +144,34 @@ function eliminar_archivo()
     {
         mostraralertasconfoco("NO HAY REGISTROS SELECCIONADOS","#tabla_archivos");
     }
+}
+
+function permisos_archivos(id_archivo,est)
+{
+    MensajeDialogLoadAjax('tabla_archivos', '.:: Cargando ...');
+    
+    $.ajax({url: 'archivos/'+id_archivo+'/edit',
+        type: 'GET',
+        data:{
+            est:est,
+        },
+        success: function(data) 
+        {
+            if (data > 0) 
+            {
+                fn_actualizar_grilla('tabla_archivos');
+                MensajeExito("MENSAJE DE EXITO","SE AGREGO UN PERMISO AL ARCHIVO",4000);
+                MensajeDialogLoadAjaxFinish('tabla_archivos');
+            }
+            else
+            {
+                 mostraralertas("hubo un error, Comunicar al Administrador");
+            }
+        },
+        error: function(data) {
+            mostraralertas("hubo un error, Comunicar al Administrador");
+            console.log('error');
+            console.log(data);
+        }
+    });
 }
