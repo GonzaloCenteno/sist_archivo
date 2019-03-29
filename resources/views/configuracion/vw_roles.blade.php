@@ -224,7 +224,7 @@
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">CODIGO &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
-                            <input id="dlg_codigo" name="dlg_codigo" type="text"  class="form-control text-center text-uppercase" style="height: 32px; ">
+                            <input id="dlg_codigo" name="dlg_codigo" type="text" maxlength="10" class="form-control text-center text-uppercase" style="height: 32px; ">
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">DESCRIPCION &nbsp;<i class="fa fa-cogs"></i></span>
                         <div class=""  >
-                            <input id="dlg_descripcion" name="dlg_descripcion" type="text"  class="form-control text-center text-uppercase" style="height: 32px; ">
+                            <input id="dlg_descripcion" name="dlg_descripcion" maxlength="512" type="text"  class="form-control text-center text-uppercase" style="height: 32px; ">
                         </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                                 <label class="label">CODIGO:</label>
                                 <label class="input">  
                                     <div class="input-group">
-                                        <input id="form_codigo" type="text" placeholder="INGRESAR CODIGO..." style="text-transform: uppercase" class="text-center">
+                                        <input id="form_codigo" type="text" placeholder="INGRESAR CODIGO..." maxlength="10" style="text-transform: uppercase" class="text-center">
                                         <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
                                     </div>
                                 </label>

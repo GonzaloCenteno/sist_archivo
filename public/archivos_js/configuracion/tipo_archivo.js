@@ -54,16 +54,17 @@ function guardar_editar_tipo_archivo(valor)
             },
             success: function(data) 
             {
-                if (data > 0) 
+                if (data.msg === 'si') 
+                {
+                    mostraralertasconfoco('LA DESCRIPCION: '+$('#dlg_descripcion').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#dlg_descripcion');
+                    MensajeDialogLoadAjaxFinish('dlg_nuevo_tipo_archivo');
+                }
+                else
                 {
                     fn_actualizar_grilla('tabla_tipo_archivo');
                     MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000)
                     dialog_close('dlg_nuevo_tipo_archivo');
                     MensajeDialogLoadAjaxFinish('dlg_nuevo_tipo_archivo');
-                }
-                else
-                {
-                     mostraralertas("hubo un error, Comunicar al Administrador");
                 }
             },
             error: function(data) {
@@ -85,16 +86,17 @@ function guardar_editar_tipo_archivo(valor)
             },
             success: function(data) 
             {
-                if (data > 0) 
+                if (data.msg === 'si') 
+                {
+                    mostraralertasconfoco('LA DESCRIPCION: '+$('#dlg_descripcion').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#dlg_descripcion');
+                    MensajeDialogLoadAjaxFinish('dlg_nuevo_tipo_archivo');
+                }
+                else
                 {
                     fn_actualizar_grilla('tabla_tipo_archivo');
                     MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE MODIFICADO CORRECTAMENTE...",4000)
                     dialog_close('dlg_nuevo_tipo_archivo');
                     MensajeDialogLoadAjaxFinish('dlg_nuevo_tipo_archivo');
-                }
-                else
-                {
-                     mostraralertas("hubo un error, Comunicar al Administrador");
                 }
             },
             error: function(data) {

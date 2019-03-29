@@ -60,16 +60,17 @@ function guardar_rol()
         },
         success: function(data) 
         {
-            if (data > 0) 
+            if (data.msg === 'si') 
             {
-                fn_actualizar_grilla('tabla_rol');
-                MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000)
-                dialog_close('dlg_nuevo_rol');
+                mostraralertasconfoco('EL CODIGO: '+$('#dlg_codigo').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#dlg_codigo');
                 MensajeDialogLoadAjaxFinish('dlg_nuevo_rol');
             }
             else
             {
-                 mostraralertas("hubo un error, Comunicar al Administrador");
+                fn_actualizar_grilla('tabla_rol');
+                MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000);
+                dialog_close('dlg_nuevo_rol');
+                MensajeDialogLoadAjaxFinish('dlg_nuevo_rol');
             }
         },
         error: function(data) {
@@ -512,15 +513,16 @@ function modificar_datos()
         },
         success: function(data) 
         {
-            if (data > 0) 
+            if (data.msg === 'si') 
+            {
+                mostraralertasconfoco('EL CODIGO: '+$('#form_codigo').val()+' YA FUE REGISTRADO EN EL SISTEMA', '#form_codigo');
+                MensajeDialogLoadAjaxFinish('dialog_editar_rol');
+            }
+            else
             {
                 MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE EDITADO CORRECTAMENTE...",4000)
                 MensajeDialogLoadAjaxFinish('dialog_editar_rol');
                 fn_actualizar_grilla('tabla_rol');
-            }
-            else
-            {
-                 mostraralertas("hubo un error, Comunicar al Administrador");
             }
         },
         error: function(data) {

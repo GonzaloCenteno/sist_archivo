@@ -131,6 +131,7 @@ class ArchivoController extends Controller
     
     public function crear_tabla_archivos(Request $request)
     {
+        $permisos = DB::table('permisos.vw_permisos')->where('id_sistema','li_config_archivos')->where('id_rol',Auth::user()->id_rol)->get();
         header('Content-type: application/json');
         $page = $_GET['page'];
         $limit = $_GET['rows'];
@@ -160,22 +161,45 @@ class ArchivoController extends Controller
         $Lista->records = $count;
         foreach ($sql as $Index => $Datos) {
             $Lista->rows[$Index]['id'] = $Datos->id_archivo;
-            if ($Datos->est == 1) 
+            if ($permisos[0]->btn_edit ==1) 
             {
-                $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onchange="permisos_archivos('.trim($Datos->id_archivo).',0)"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+                if ($Datos->est == 1) 
+                {
+                    $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onchange="permisos_archivos('.trim($Datos->id_archivo).',0)"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+                }
+                else
+                {
+                    $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onchange="permisos_archivos('.trim($Datos->id_archivo).',1)"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+                }
+
+                if ($Datos->est == 2) 
+                {
+                    $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onchange="permisos_archivos('.trim($Datos->id_archivo).',0)"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+                }
+                else
+                {
+                    $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onchange="permisos_archivos('.trim($Datos->id_archivo).',2)"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+                }
             }
             else
             {
-                $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onchange="permisos_archivos('.trim($Datos->id_archivo).',1)"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
-            }
-            
-            if ($Datos->est == 2) 
-            {
-                $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onchange="permisos_archivos('.trim($Datos->id_archivo).',0)"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
-            }
-            else
-            {
-                $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onchange="permisos_archivos('.trim($Datos->id_archivo).',2)"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+                if ($Datos->est == 1) 
+                {
+                    $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onclick="javascript: sin_permiso(); return false;" readonly="readonly"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+                }
+                else
+                {
+                    $nuevo = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onclick="javascript: sin_permiso(); return false;" readonly="readonly"></div><div><a class="btn btn-labeled btn-sm col-md-7" style="text-decoration: none;color:white;background-color:#CC191C" href="'.route('download',$Datos->id_archivo).'" ><span class="btn-label"><i class="fa fa-print"></i></span> DESCARGAR</a></div>';
+                }
+
+                if ($Datos->est == 2) 
+                {
+                    $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" checked="checked" onclick="javascript: sin_permiso(); return false;" readonly="readonly"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+                }
+                else
+                {
+                    $ver = '<div class="col-md-3"><input style="height:30px; width:100%" type="checkbox" onclick="javascript: sin_permiso(); return false;" readonly="readonly"></div><div><button class="btn btn-labeled btn-lg col-md-7" style="background-color:#D48411;color:white;" type="button" onclick="ver_archivos('.trim($Datos->id_archivo).')"><span class="btn-label"><i class="fa fa-search"></i></span> VER ARCHIVO</button></div>';
+                }
             }
             $Lista->rows[$Index]['cell'] = array(
                 trim($Datos->id_archivo),

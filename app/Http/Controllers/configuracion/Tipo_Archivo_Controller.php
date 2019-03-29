@@ -58,23 +58,45 @@ class Tipo_Archivo_Controller extends Controller
 
     public function create(Request $request)
     {
-        $Tipo_Archivo = new  Tipo_Archivo;
-        $Tipo_Archivo->descripcion = strtoupper($request['descripcion']);
-        
-        $Tipo_Archivo->save();
-        return $Tipo_Archivo->id_tipo_archivo;
+        $select=DB::table('principal.tipo_archivo')->where('descripcion',strtoupper($request['descripcion']))->get();
+
+        if ($select->count() > 0) 
+        {
+            return response()->json([
+                'msg' => 'si',
+            ]);
+        }
+        else
+        {
+            $Tipo_Archivo = new  Tipo_Archivo;
+            $Tipo_Archivo->descripcion = strtoupper($request['descripcion']);
+
+            $Tipo_Archivo->save();
+            return $Tipo_Archivo->id_tipo_archivo;
+        }
     }
 
     public function edit($id_tipo_archivo,Request $request)
     {
-        $Tipo_Archivo = new Tipo_Archivo;
-        $val=  $Tipo_Archivo::where("id_tipo_archivo","=",$id_tipo_archivo)->first();
-        if($val)
+        $sql = DB::table('principal.tipo_archivo')->where('descripcion',strtoupper($request['descripcion']))->where('id_tipo_archivo','<>',$id_tipo_archivo)->get();
+        
+        if ($sql->count() > 0) 
         {
-            $val->descripcion = strtoupper($request['descripcion']);
-            $val->save();
+            return response()->json([
+                'msg' => 'si',
+            ]);
         }
-        return $id_tipo_archivo;
+        else
+        {
+            $Tipo_Archivo = new Tipo_Archivo;
+            $val=  $Tipo_Archivo::where("id_tipo_archivo","=",$id_tipo_archivo)->first();
+            if($val)
+            {
+                $val->descripcion = strtoupper($request['descripcion']);
+                $val->save();
+            }
+            return $id_tipo_archivo;
+        }
     }
 
     public function destroy(Request $request)

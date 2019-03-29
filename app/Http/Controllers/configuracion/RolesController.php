@@ -75,15 +75,26 @@ class RolesController extends Controller
 
     public function edit($id_rol,Request $request)
     {
-        $Roles = new Roles;
-        $val=  $Roles::where("id_rol","=",$id_rol)->first();
-        if($val)
+        $sql = DB::table('principal.roles')->where('codigo',strtoupper($request['codigo']))->where('id_rol','<>',$id_rol)->get();
+        
+        if ($sql->count() > 0) 
         {
-            $val->codigo      = strtoupper($request['codigo']);
-            $val->descripcion = strtoupper($request['descripcion']);
-            $val->save();
+            return response()->json([
+                'msg' => 'si',
+            ]);
         }
-        return $id_rol;
+        else
+        {
+            $Roles = new Roles;
+            $val=  $Roles::where("id_rol","=",$id_rol)->first();
+            if($val)
+            {
+                $val->codigo      = strtoupper($request['codigo']);
+                $val->descripcion = strtoupper($request['descripcion']);
+                $val->save();
+            }
+            return $id_rol;
+        }
     }
 
     public function destroy($id_rol_tip_arch)
@@ -133,12 +144,23 @@ class RolesController extends Controller
     
     public function crear_roles(Request $request)
     {
-        $Roles = new Roles;
-        $Roles->codigo      = strtoupper($request['codigo']);
-        $Roles->descripcion = strtoupper($request['descripcion']);
-        
-        $Roles->save();
-        return $Roles ->id_rol;
+        $select=DB::table('principal.roles')->where('codigo',strtoupper($request['codigo']))->get();
+
+        if ($select->count() > 0) 
+        {
+            return response()->json([
+                'msg' => 'si',
+            ]);
+        }
+        else
+        {
+            $Roles = new Roles;
+            $Roles->codigo      = strtoupper($request['codigo']);
+            $Roles->descripcion = strtoupper($request['descripcion']);
+
+            $Roles->save();
+            return $Roles ->id_rol;
+        }
     }
     
     public function traer_datos_roles($id_rol)
