@@ -222,7 +222,7 @@ class ArchivoController extends Controller
                 $nombre = $file->getClientOriginalName();
                 $tipo = $file->getClientMimeType();
 
-                $ruta = $file->storeAs('public/' . Auth::user()->usuario,date('Y-m-d'). '_' .$nombre);
+                $ruta = $file->storeAs('public/' . Auth::user()->usuario,date('Y-m-d'). '_' . uniqid().'_'.$nombre);
                 //$r= \Storage::disk('local')->put($nombre,  \File::get($file));
                 
                 $Archivos                  = new Archivos;

@@ -32,6 +32,8 @@
         <link rel="icon" type="image/png" href="{{ asset('img/bus-home.png') }}" />
         <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
         <link href="{{ asset('css/jquery-confirm.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 
     </head>
     <body class="desktop-detected pace-done fixed-header fixed-navigation">
@@ -186,6 +188,7 @@
         <script src="{{ asset('js/libs/jquery-ui-1.10.3.min.js') }}"></script>
 
         <script src="{{ asset('archivos_js/global_function.js') }}"></script>
+        <script src="{{ asset('js/dropzone.js') }}"></script>
         <script src="{{ asset('js/moment.js') }}"></script>
         <script src="{{ asset('js/app.config.js') }}"></script>
         <script src="{{ asset('js/app.min.js') }}"></script>

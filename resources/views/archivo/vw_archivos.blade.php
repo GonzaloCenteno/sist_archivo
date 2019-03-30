@@ -94,10 +94,55 @@
 </section>
 @section('page-js-script')
 <script type="text/javascript">
+    
+    Dropzone.autoDiscover = false;
+    var myDropzone;
+    
     $(document).ready(function (){
         
         $("#menu_archivos").show();
-        $("#li_config_archivos").addClass('cr-active');;
+        $("#li_config_archivos").addClass('cr-active');
+        
+        myDropzone = new Dropzone("#FormularioArchivo", {
+            url: "archivos?tipo=1",                        
+            autoProcessQueue: false,
+            paramName: "file",
+            maxFiles: 50,
+            maxFileSize: 1000000,
+            uploadMultiple: true,
+            addRemoveLinks: true,
+            parallelUploads: 50,
+            init: function () {
+                this.on("complete", function (file) {
+                    if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) 
+                    {
+                        MensajeDialogLoadAjaxFinish('dlg_nuevo_archivo');
+                        MensajeExito("MENSAJE DE EXITO","EL REGISTRO FUE CREADO CORRECTAMENTE...",4000);
+                        $("#dlg_nuevo_archivo").dialog("close");
+                        fn_actualizar_grilla('tabla_archivos');
+                    }
+                });
+            },
+            sending: function(file, xhr, formData){
+                MensajeDialogLoadAjax('dlg_nuevo_archivo', '... .:: Guardando ::. ...');
+                formData.append('id_tipo_archivo', $("#id_tipo_archivo").val());
+            },
+            success: function (file, response) {
+                if(response == 1)
+                { 
+                    myDropzone.removeAllFiles();
+                }
+                else
+                {
+                    MensajeDialogLoadAjaxFinish('dlg_nuevo_archivo');
+                    mostraralertas('* Contactese con el Administrador...');    
+                }
+            },
+            error: function(file, response)
+            {
+               return console.log(response);
+            }
+        });
         
         jQuery("#tabla_archivos").jqGrid({
             url: 'archivos/0?grid=archivos',
@@ -155,6 +200,15 @@
         });
          
     });
+    
+    function guardar_archivo()
+    {
+        if ($('#id_tipo_archivo').val() == '0') {
+            mostraralertasconfoco('* DEBE SELECCIONAR UNA OPCION...', '#id_tipo_archivo');
+            return false;
+        }
+        myDropzone.processQueue();
+    }
 </script>
 
 @stop
@@ -164,10 +218,12 @@
     <div class='cr_content col-xs-12 ' style="margin-bottom: 10px;">
         <div class="col-xs-12 cr-body" >
             <div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin-top: 0px;">
-                <form id="FormularioArchivo" name="FormularioArchivo" method="post" enctype="multipart/form-data">
+                <form id="FormularioArchivo" name="FormularioArchivo" method="post" enctype="multipart/form-data" class="dropzone">
                 <input type="hidden" name="_token" id="_token1" value="{{ csrf_token() }}" data-token="{{ csrf_token() }}"> 
+                </form>
                 
-                <div class="col-xs-12" style="margin-top: 10px;"></div>
+                <div class="col-xs-12" style="padding-top: 20px;"></div>
+                
                 <div class="col-xs-12" style="padding: 0px;">
                     <div class="input-group input-group-md" style="width: 100%">
                         <span class="input-group-addon" style="width: 30%;">TIPO ARCHIVO &nbsp;<i class="fa fa-cogs"></i></span>
@@ -181,17 +237,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-xs-12" style="margin-top: 10px;"></div>
-                <div class="col-xs-12" style="padding: 0px;">
-                    <div class="input-group input-group-md" style="width: 100%">
-                        <span class="input-group-addon" style="width: 30%;">ARCHIVOS &nbsp;<i class="fa fa-cogs"></i></span>
-                        <div class="">
-                            <input id="file" name="file[]" type="file" multiple="true" class="form-control text-center" style="height: 32px;" >
-                        </div>
-                    </div>
-                </div>
-                </form>
             </div>
         </div>
     </div>
